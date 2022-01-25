@@ -6,11 +6,11 @@ ScannerWedge app integrates the original barcode SDK provided by various hardwar
 
 ## Module selection / switching
 ScannerWedge app currently supports Newland EM 2096 and Honeywell n3680 barcode modules, and will support more modules in the future. You can switch the barcode module through the scanner drop-down menu on the app scanner page
-![](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/master/scanner.png)
+![](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/images/scanner.png)
 
 ## Output mode selection / switching
 ScannerWedge app has two output methods for the scanned barcode data. Users can choose according to their own application scenarios and needs. You can switch the data output mode through the output method drop-down menu on the app advanced page.
-![](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/master/output_method.png)
+![](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/images/output_method.png)
 
 ### Keyboard mode
 Keyboard mode is to send the scanned data to the system in the form of analog keyboard input.  In this mode, the scanned data will be directly filled into the edit box where the focus is located
