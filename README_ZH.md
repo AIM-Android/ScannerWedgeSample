@@ -1,15 +1,15 @@
-[English](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/README.md)
+[English](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/README.md)
 # ScannerWedge
 
 ScannerWedge App将多种硬件厂商提供的原始Barcode SDK集成到了一起。你只需要安装并运行该app就可以很轻松的实现多种Barcode模块的扫描功能。
 
 ## 模块选择/切换
 ScannerWedge App目前支持NewLand EM 2096和Honeywell N3680两种Barcode模块以后还会支持更多模块。可以通过App Scanner页面的Scanner下拉菜单来切换Barcode模块
-![](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/images/scanner.png)
+![](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/images/scanner.png)
 
 ## 输出方式选择/切换
 ScannerWedge App对扫描到的条形码数据有两种输出方式，用户可以根据自己应用场景和需求做出选择。可以通过App Advanced页面的Output method下拉菜单来切换数据输出模式
-![](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/images/output_method.png)
+![](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/images/output_method.png)
 
 ### 键盘方式
 键盘模式是将扫描的数据以模拟键盘输入的形式发送到系统。在此模式下，扫描的数据将直接填充到焦点所在的编辑框中
