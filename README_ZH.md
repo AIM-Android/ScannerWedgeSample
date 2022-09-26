@@ -17,7 +17,7 @@ ScannerWedge App对扫描到的条形码数据有键盘方式和广播方式两�
 
 ###  2.3 确认并设置配置
 请点击ScannerWedge App页面的“确认”按键将配置信息设置下去
-![](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/images/confrim.png)
+![](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/images/confirm.png)
 
 ## 3. 安装并运行ScannerWedgeSample App
 安装并且运行ScannerWedgeSample App，当点击“Trigger once Scan“按键时，就开始扫描，当扫描条形码成功后就可以在页面看到扫描到的条形码数据
