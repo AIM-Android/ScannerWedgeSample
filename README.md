@@ -17,7 +17,7 @@ ScannerWedge app has two output methods for the scanned barcode data. Users can 
 
 ### 2.3  Confirm and set the configuration 
 Please click the "Confirm" button on the ScannerWedge App page to set the configuration information 
-![](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/images/confrim.png)
+![](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/images/confirm.png)
 
 ## 3. Install and run the ScannerWedgeSample App
 Install and run the ScannerWedgeSample App. When you click the "Trigger once Scan" button, scanning starts. After scanning the barcode successfully, you can see the scanned barcode data on the page
