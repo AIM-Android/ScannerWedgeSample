@@ -1,54 +1,28 @@
-[简体中文](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/README_ZH.md)
+[简体中文](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/README_ZH.md)
 
-# ScannerWedge
+This project is a sample code written for the use of the ScannerWedge App, mainly to guide developers on how to trigger the ScannerWedge App in their own app to conduct a barcode scanning and how to receive barcode scanning results from the ScannerWedge App 
 
+# usage
+## 1. Install ScannerWedge App
 ScannerWedge app integrates the original barcode SDK provided by various hardware manufacturers. You only need to install and run the app to easily realize the scanning function of multiple barcode modules.
 
-## Module selection / switching
-ScannerWedge app currently supports Newland EM 2096 and Honeywell n3680 barcode modules, and will support more modules in the future. You can switch the barcode module through the scanner drop-down menu on the app scanner page
-![](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/images/scanner.png)
+## 2. Run the ScannerWedge App and set it up 
+### 2.1  Select Module
+ScannerWedge app currently supports Newland EM 2096 and Honeywell n3680 barcode modules, and will support more modules in the future. Please switch the barcode module through the scanner drop-down menu on the app scanner page
+![](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/images/scanner.png)
 
-## Output mode selection / switching
-ScannerWedge app has two output methods for the scanned barcode data. Users can choose according to their own application scenarios and needs. You can switch the data output mode through the output method drop-down menu on the app advanced page.
-![](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/images/output_method.png)
+### 2.2 Select Output Mode
+ScannerWedge app has two output methods for the scanned barcode data. Users can choose according to their own application scenarios and needs. Please switch the data output mode through the output method drop-down menu on the app advanced page.  The SannerWedgeSample App receives data through broadcast, so you need to select the broadcast output mode.
+![](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/images/output_method.png)
 
-### Keyboard mode
-Keyboard mode is to send the scanned data to the system in the form of analog keyboard input.  In this mode, the scanned data will be directly filled into the edit box where the focus is located
+### 2.3  Confirm and set the configuration 
+Please click the "Confirm" button on the ScannerWedge App page to set the configuration information 
+![](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/images/confrim.png)
 
-### Broadcast mode
-Broadcast mode is to send the scanned data in the form of broadcast. If you want to get data, you need to listen to the specified broadcast to get data.
+## 3. Install and run the ScannerWedgeSample App
+Install and run the ScannerWedgeSample App. When you click the "Trigger once Scan" button, scanning starts. After scanning the barcode successfully, you can see the scanned barcode data on the page
 
-# ScannerWedgeSample
-ScannerWedgeSample is used to guide you how to receive the scanning results sent by ScannerWedge app through broadcast mode. The main codes are as follows：
-
-## Step 1: implement the broadcast receiver and process the data
-
-Implement a broadcast receiver to process the broadcast from "com.advantech.scannerwedge.TRANSFER_DATA". Receive additional parameters with the key value of "barcodedata" in the receiver, which is the data scanned by the barcode module. 
-````java
-private class BarCodeDataBroadcastReceiver extends BroadcastReceiver {
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        String barcodeData = intent.getStringExtra("barcodeData");
-        // TODO Add logical processing data
-    }
-}
-````
-
-## Step 2: register the broadcast receiver
-
-Create a broadcast receiver instance, register the broadcast receiver, and receive the broadcast from "com.advantech.scannerwedge.TRANSFER_DATA".
-````java
-IntentFilter filter = new IntentFilter();
-filter.addAction("com.advantech.scannerwedge.TRANSFER_DATA");
-BarCodeDataBroadcastReceiver barCodeDataBroadcastReceiver = new BarCodeDataBroadcastReceiver();
-registerReceiver(barCodeDataBroadcastReceiver, filter);
-````
-Through the above two steps, you can easily receive the barcode data scanned from the ScannerWedge app.
-
-## Stop receiving barcode data
-
-When you don't need to receive barcode data, you just need to de register the previous broadcast receiver.
-````java
-unregisterReceiver(barCodeDataBroadcastReceiver);
-````
+# other
+For more information about the ScannerWedge App, please refer to 
+[User Manual  for ScannerWedge App](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/doc/ScannerWedge_quick_start_guide_v1.0.pdf)  
+[ScannerWedge release package download](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/release/v1.0/ScannerWedge_20220316_V1.0.7z)

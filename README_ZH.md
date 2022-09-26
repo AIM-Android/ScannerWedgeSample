@@ -1,53 +1,28 @@
-[English](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/README.md)
-# ScannerWedge
+[English](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/README.md)
 
-ScannerWedge App将多种硬件厂商提供的原始Barcode SDK集成到了一起。你只需要安装并运行该app就可以很轻松的实现多种Barcode模块的扫描功能。
+该项目是为ScannerWedge App的使用而写的一个范例代码，主要在于指导开发者来如何在自己的app中触发ScannerWedge App进行一次条形码扫描以及如何接收来自于ScannerWedge App的条形码扫描结果
 
-## 模块选择/切换
-ScannerWedge App目前支持NewLand EM 2096和Honeywell N3680两种Barcode模块以后还会支持更多模块。可以通过App Scanner页面的Scanner下拉菜单来切换Barcode模块
-![](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/images/scanner.png)
+# 用法
+## 1. 安装ScannerWedge App
+ScannerWedge App将多种硬件厂商提供的原始的条形码扫描仪SDK集成到了一起。你只需要安装并运行该app就可以很轻松的实现多种条形码扫描仪模块的扫描功能。
 
-## 输出方式选择/切换
-ScannerWedge App对扫描到的条形码数据有两种输出方式，用户可以根据自己应用场景和需求做出选择。可以通过App Advanced页面的Output method下拉菜单来切换数据输出模式
-![](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/images/output_method.png)
+## 2. 运行ScannerWedge App并进行设置
+### 2.1 选择模块
+ScannerWedge App目前支持NewLand EM 2096和Honeywell N3680两种Barcode模块以后还会支持更多模块。请在App Scanner页面的Scanner下拉菜单来选择对应的Barcode模块
+![](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/images/scanner.png)
 
-### 键盘方式
-键盘模式是将扫描的数据以模拟键盘输入的形式发送到系统。在此模式下，扫描的数据将直接填充到焦点所在的编辑框中
+### 2.2 选择输出方式
+ScannerWedge App对扫描到的条形码数据有键盘方式和广播方式两种输出方式，用户可以根据自己应用场景和需求做出选择。请在App Advanced页面的Output method下拉菜单来切换数据输出模式。SannerWedgeSample App是通过广播接收数据的，所以这里需要选择为广播输出模式
+![](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/images/output_method.png)
 
-### 广播方式
-广播模式是将扫描的数据以广播的形式发送出去。如果你想得到数据，你需要监听指定广播来获取数据。
+###  2.3 确认并设置配置
+请点击ScannerWedge App页面的“确认”按键将配置信息设置下去
+![](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/images/confrim.png)
 
-# ScannerWedgeSample
-ScannerWedgeSample 用于指导你如何接收ScannerWedge App 通过广播模式发送出来的扫描结果。主要代码如下：
+## 3. 安装并运行ScannerWedgeSample App
+安装并且运行ScannerWedgeSample App，当点击“Trigger once Scan“按键时，就开始扫描，当扫描条形码成功后就可以在页面看到扫描到的条形码数据
 
-## 第一步：实现广播接收器，并处理数据
-
-实现一个广播接收器，处理来自于"com.advantech.scannerwedge.TRANSFER_DATA"的广播。在接收器中接收key值为"barcodeData"的额外参数，该参数就是Barcode模块扫描到的数据。
-````java
-private class BarCodeDataBroadcastReceiver extends BroadcastReceiver {
-
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        String barcodeData = intent.getStringExtra("barcodeData");
-        // TODO Add logical processing data
-    }
-}
-````
-
-## 第二步：注册广播接收器
-
-创建广播接收器实例，并注册广播接收器，接收来自"com.advantech.scannerwedge.TRANSFER_DATA"的广播。
-````java
-IntentFilter filter = new IntentFilter();
-filter.addAction("com.advantech.scannerwedge.TRANSFER_DATA");
-BarCodeDataBroadcastReceiver barCodeDataBroadcastReceiver = new BarCodeDataBroadcastReceiver();
-registerReceiver(barCodeDataBroadcastReceiver, filter);
-````
-通过上面两步你就可以轻松的接收到来自于ScannerWedge app扫描到的条形码数据了。
-
-## 停止接收Barcode数据
-
-当你不需要接收Barcode数据的时候只需要反注册掉之前的广播接收器即可
-````java
-unregisterReceiver(barCodeDataBroadcastReceiver);
-````
+# 其他
+有关ScannerWedge App的更多资料请参考
+[ScannerWedge App使用说明](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/doc/ScannerWedge_quick_start_guide_v1.0.pdf)
+[ScannerWedge发布包下载](https://github.com/AIM-Android/ScannerWedgeSample/blob/main/release/v1.0/ScannerWedge_20220316_V1.0.7z)
