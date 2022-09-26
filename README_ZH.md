@@ -24,5 +24,5 @@ ScannerWedge App对扫描到的条形码数据有键盘方式和广播方式两�
 
 # 其他
 有关ScannerWedge App的更多资料请参考:  
-[ScannerWedge App使用说明](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/doc/ScannerWedge_quick_start_guide_v1.0.pdf)
+[ScannerWedge App使用说明](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/doc/ScannerWedge_quick_start_guide_v1.0.pdf)  
 [ScannerWedge发布包下载](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/release/v1.0/ScannerWedge_20220316_V1.0.7z)
