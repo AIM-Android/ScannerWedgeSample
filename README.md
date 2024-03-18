@@ -8,7 +8,7 @@ ScannerWedge app integrates the original barcode SDK provided by various hardwar
 
 ## 2. Run the ScannerWedge App and set it up 
 ### 2.1  Select Module
-ScannerWedge app currently supports Newland EM 2096 and Honeywell n3680 barcode modules, and will support more modules in the future. Please switch the barcode module through the scanner drop-down menu on the app scanner page
+ScannerWedge app currently supports Newland EM 2096,NewLand N1 and Honeywell n3680 barcode modules, and will support more modules in the future. Please switch the barcode module through the scanner drop-down menu on the app scanner page
 ![](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/images/scanner.png)
 
 ### 2.2 Select Output Mode

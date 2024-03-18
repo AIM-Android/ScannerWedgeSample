@@ -8,7 +8,7 @@ ScannerWedge App将多种硬件厂商提供的原始的条形码扫描仪SDK集�
 
 ## 2. 运行ScannerWedge App并进行设置
 ### 2.1 选择模块
-ScannerWedge App目前支持NewLand EM 2096和Honeywell N3680两种Barcode模块以后还会支持更多模块。请在App Scanner页面的Scanner下拉菜单来选择对应的Barcode模块
+ScannerWedge App目前支持NewLand EM 2096、NewLand N1和Honeywell N3680两种Barcode模块以后还会支持更多模块。请在App Scanner页面的Scanner下拉菜单来选择对应的Barcode模块
 ![](https://github.com/AIM-Android/ScannerWedgeSample/blob/master/images/scanner.png)
 
 ### 2.2 选择输出方式
