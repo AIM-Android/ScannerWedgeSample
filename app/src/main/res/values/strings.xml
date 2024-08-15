@@ -1,3 +1,39 @@
 <resources>
-    <string name="app_name">ScannerWedgeSample</string>
+    <string name="app_name">scannerwedgedemo</string>
+
+    <string name="hint_usb_name">/dev/bus/usb/001/003</string>
+    <string name="hint_usb_item">Bus 001, Device 003, ID 3118:3649, Western Digital Technologies, Inc.</string>
+    <string name="txt_trigger_once_scan">Trigger once scan</string>
+    <string name="tips_long_press_the_middle_of_the_screen_to_clear_it">Long press the middle of the screen to clear it</string>
+    <string name="txt_baudrate_115200">baudrate : 115200</string>
+    <string name="txt_open">open</string>
+    <string name="txt_close">close</string>
+    <string name="txt_clear">clear</string>
+    <string name="txt_send">send</string>
+    <string name="txt_port">port :</string>
+    <string name="txt_manufacturername">Western Digital Technologies, Inc.</string>
+    <string name="txt_id_3118_3649">ID 3118:3649</string>
+    <string name="txt_baudrate">baudrate : </string>
+    <string name="txt_115200">115200</string>
+
+    <!-- Preference Titles -->
+    <string name="barcode_scanner_header">Barcode Scanner</string>
+    <string name="uhf_rfid_header">UHF RFID</string>
+    <string name="comport_header">ComPort</string>
+    <string name="usb_device_header">USB Device</string>
+    <string name="lan_header">LAN</string>
+    <string name="nfc_header">NFC</string>
+
+    <!-- Messages Preferences -->
+    <string name="barcode_scanner_test_title">barcode scanner test</string>
+    <string name="uhf_rfid_test_title">uhf rfid test</string>
+    <string name="comport_test_title">comport test</string>
+    <string name="usb_device_test_title">usb device test</string>
+    <string name="lan_test_title">lan test</string>
+    <string name="nfc_test_title">nfc test</string>
+    <string name="txt_sn">序列号 :</string>
+    <string name="txt_atqa">ATQA :</string>
+    <string name="txt_sak">SAK :</string>
+    <string name="txt_maxtransceivelength">MAXTransceiveLength :</string>
+    <string name="txt_support_argument">Support argument : </string>
 </resources>

@@ -1,44 +1,67 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+}
 
 android {
     namespace 'com.advantech.scannerwedgedemo'
     compileSdk 33
-    signingConfigs {
-        config {
-            keyAlias 'android'
-            keyPassword 'android'
-            storePassword 'android'
-            storeFile file('../platform.jks')
-        }
-    }
 
     defaultConfig {
         applicationId "com.advantech.scannerwedgedemo"
-        minSdkVersion 23
-        //noinspection EditedTargetSdkVersion
-        targetSdkVersion 33
+        minSdk 24
+        targetSdk 33
         versionCode 1
         versionName "1.0.0"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags ''
+            }
+        }
+
     }
 
-    applicationVariants.configureEach { variant ->
-        if ("release" == variant.buildType.name) {
-            variant.outputs.configureEach {
-                outputFileName = "ScannerWedgeSample_v${defaultConfig.versionName}.apk"
-            }
+    externalNativeBuild {
+        cmake {
+            // 编译
+            path file('src/main/cpp/CMakeLists.txt')
+            version '3.10.2'
+        }
+    }
+
+    signingConfigs {
+        AIM75 {
+            keyAlias 'AIM75-GMS-userdebug'
+            keyPassword '886227947304'
+            storePassword '886227947304'
+            storeFile file('../AIM75-GMS-userdebug-platform.jks')
+            v2SigningEnabled true
+        }
+
+        AIM77 {
+            keyAlias 'android'
+            keyPassword 'android'
+            storePassword 'android'
+            storeFile file('../AIM77-platform.jks')
         }
     }
 
     buildTypes {
         release {
             minifyEnabled false
-            signingConfig signingConfigs.config
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.AIM75
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
     implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'androidx.preference:preference:1.2.0'
 }

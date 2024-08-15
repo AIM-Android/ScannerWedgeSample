@@ -1,0 +1,81 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory app:title="@string/barcode_scanner_header">
+
+        <Preference
+            android:key="barcode_scanner"
+            android:title="@string/barcode_scanner_test_title"
+            android:summary="">
+            <intent
+                android:action="com.advantech.scannerwedgedemo.BarcodeScannerActivity.class"
+                android:targetClass="com.advantech.scannerwedgedemo.module.BarcodeScannerActivity"
+                android:targetPackage="com.advantech.scannerwedgedemo" />
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/uhf_rfid_header">
+
+        <Preference
+            android:key="uhf_rfid"
+            android:title="@string/uhf_rfid_test_title"
+            android:summary="">
+            <intent
+                android:action="com.advantech.scannerwedgedemo.UhfRfidActivity.class"
+                android:targetClass="com.advantech.scannerwedgedemo.module.UhfRfidActivity"
+                android:targetPackage="com.advantech.scannerwedgedemo" />
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/comport_header">
+
+        <Preference
+            android:key="comport"
+            android:title="@string/comport_test_title"
+            android:summary="">
+            <intent
+                android:action="com.advantech.scannerwedgedemo.ComPortActivity.class"
+                android:targetClass="com.advantech.scannerwedgedemo.module.ComPortActivity"
+                android:targetPackage="com.advantech.scannerwedgedemo" />
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/usb_device_header">
+
+        <Preference
+            android:key="usb_device"
+            android:title="@string/usb_device_test_title"
+            android:summary="">
+            <intent
+                android:action="com.advantech.scannerwedgedemo.USBDeviceActivity.class"
+                android:targetClass="com.advantech.scannerwedgedemo.module.USBDeviceActivity"
+                android:targetPackage="com.advantech.scannerwedgedemo" />
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/lan_header">
+
+        <Preference
+            android:key="lan"
+            android:title="@string/lan_test_title"
+            android:summary="">
+            <intent
+                android:action="com.advantech.scannerwedgedemo.LANActivity.class"
+                android:targetClass="com.advantech.scannerwedgedemo.module.LANActivity"
+                android:targetPackage="com.advantech.scannerwedgedemo" />
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/nfc_header">
+
+        <Preference
+            android:key="nfc"
+            android:title="@string/nfc_test_title"
+            android:summary="">
+            <intent
+                android:action="com.advantech.scannerwedgedemo.NFCActivity.class"
+                android:targetClass="com.advantech.scannerwedgedemo.module.NFCActivity"
+                android:targetPackage="com.advantech.scannerwedgedemo" />
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>
