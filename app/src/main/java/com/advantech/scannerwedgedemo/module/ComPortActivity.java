@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.advantech.scannerwedgedemo.baseui.BaseActivity;
 import com.advantech.scannerwedgedemo.R;
+import com.advantech.scannerwedgedemo.utils.SerialPortFinder;
 
 import java.io.File;
 import java.io.FileDescriptor;
@@ -54,7 +56,7 @@ public class ComPortActivity extends BaseActivity {
     @Override
     protected void initView(Bundle savedInstanceState) {
         baudrateArray = getResources().getStringArray(R.array.com_baudrate);
-        portArray = getResources().getStringArray(R.array.com_interface);
+//        portArray = getResources().getStringArray(R.array.com_interface);
 
         Spinner baudrateSpinner = findViewById(R.id.baudrate_sp);
         baudrateSpinner.setSelection(0);
@@ -71,11 +73,15 @@ public class ComPortActivity extends BaseActivity {
             }
         });
         Spinner portSpinner = findViewById(R.id.port_sp);
+        SerialPortFinder finder = new SerialPortFinder();
+        portArray = finder.getAllDevicesPath();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, portArray);
+        portSpinner.setAdapter(adapter);
         portSpinner.setSelection(0);
         portSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mPort = "/dev/" + portArray[position];
+                mPort = portArray[position];
                 Log.d(TAG, "port : " + mPort);
             }
 
