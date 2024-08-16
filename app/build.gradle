@@ -39,6 +39,12 @@ android {
         }
     }
 
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach {
+            outputFileName = "ScannerWedgeSample_v${defaultConfig.versionName}_${variant.buildType.name}.apk"
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled false
