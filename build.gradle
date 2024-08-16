@@ -37,12 +37,6 @@ allprojects {
         google()
         mavenCentral()
     }
-
-    gradle.projectsEvaluated {
-        tasks.withType(JavaCompile) {
-            options.compilerArgs.add('-Xbootclasspath/p:app\\libs\\framework_android.jar;')
-        }
-    }
 }
 
 tasks.register('clean', Delete) {

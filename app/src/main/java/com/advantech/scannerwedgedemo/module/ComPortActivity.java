@@ -81,7 +81,8 @@ public class ComPortActivity extends BaseActivity {
         portSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                mPort = "/dev/" + portArray[position];
+//                mPort = "/dev/" + portArray[position];
+                mPort = portArray[position];
                 Log.d(TAG, "port : " + mPort);
             }
 
@@ -98,6 +99,8 @@ public class ComPortActivity extends BaseActivity {
             if ("open".equals(controlButton.getText())) {
                 if (openFileDescriptor()) {
                     controlButton.setText("close");
+                    baudrateSpinner.setEnabled(false);
+                    portSpinner.setEnabled(false);
                     mInputStream = new FileInputStream(fd);
                     mOutputStream = new FileOutputStream(fd);
                     isOpen = true;
@@ -105,6 +108,8 @@ public class ComPortActivity extends BaseActivity {
                 }
             } else {
                 closeFileDescriptor();
+                baudrateSpinner.setEnabled(true);
+                portSpinner.setEnabled(true);
                 isOpen = false;
                 if (thread != null) {
                     thread.interrupt();
@@ -118,7 +123,7 @@ public class ComPortActivity extends BaseActivity {
         });
         Button clear = findViewById(R.id.clear_btn);
         clear.setOnClickListener(v -> {
-            comDataEdt.setText("");
+            receiveTv.setText("");
         });
     }
 

@@ -53,19 +53,6 @@
         </Preference>
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/lan_header">
-
-        <Preference
-            android:key="lan"
-            android:title="@string/lan_test_title"
-            android:summary="">
-            <intent
-                android:action="com.advantech.scannerwedgedemo.LANActivity.class"
-                android:targetClass="com.advantech.scannerwedgedemo.module.LANActivity"
-                android:targetPackage="com.advantech.scannerwedgedemo" />
-        </Preference>
-    </PreferenceCategory>
-
     <PreferenceCategory app:title="@string/nfc_header">
 
         <Preference

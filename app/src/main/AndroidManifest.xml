@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.advantech.scannerwedgedemo"
-    android:process="system"
-    android:sharedUserId="android.uid.system"
-    tools:ignore="Deprecated">
+    package="com.advantech.scannerwedgedemo">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.CONNECTIVITY_INTERNAL"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.NETWORK_STACK"
-        tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.MAINLINE_NETWORK_STACK" />
     <uses-feature android:name="android.hardware.usb.host" />
     <uses-permission android:name="android.permission.NFC" />
     <uses-feature
@@ -32,10 +19,6 @@
             android:exported="false"
             android:configChanges="orientation|screenSize"
             android:label="NFC" />
-        <activity
-            android:name=".module.LANActivity"
-            android:exported="false"
-            android:label="LAN" />
         <activity
             android:name=".module.ComPortActivity"
             android:exported="false"
