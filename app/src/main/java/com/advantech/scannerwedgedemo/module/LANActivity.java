@@ -1,5 +1,7 @@
 package com.advantech.scannerwedgedemo.module;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -9,6 +11,8 @@ import android.widget.Spinner;
 
 import com.advantech.scannerwedgedemo.R;
 import com.advantech.scannerwedgedemo.baseui.BaseActivity;
+import com.advantech.scannerwedgedemo.module.receiver.NetworkStateReceiver;
+import com.advantech.scannerwedgedemo.utils.IpGetUtil;
 
 public class LANActivity extends BaseActivity {
 
@@ -17,6 +21,8 @@ public class LANActivity extends BaseActivity {
     private String[] ethArray;
 
     private String mEthIndex;
+
+    private NetworkStateReceiver networkStateReceiver;
 
     @Override
     protected int getLayoutResID() {
@@ -46,13 +52,32 @@ public class LANActivity extends BaseActivity {
         setStaticIpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                IpGetUtil.setEthernetIP(LANActivity.this, "STATIC",
+                        "192.168.2.168", "255.255.255.0",
+                        "192.168.2.1", "4.4.4.4", "114.114.114.114");
             }
         });
         Button dhcpCheckButton = findViewById(R.id.dhcp_btn);
         dhcpCheckButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                IpGetUtil.setEthernetIP(LANActivity.this, "DHCP",
+                        "", "", "", "", "");
+            }
+        });
+
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        networkStateReceiver = new NetworkStateReceiver();
+        registerReceiver(networkStateReceiver, filter);
+
+        networkStateReceiver.setNetworkStateListener(new NetworkStateReceiver.NetworkStateListener() {
+            @Override
+            public void getNetworkState(int state) {
+                String ip = IpGetUtil.getIpAddress(LANActivity.this);
+                showToast(state > NetworkStateReceiver.NETSTATUS_INAVAILABLE
+                        ? getString(R.string.ip_address, ip)
+                        : getString(R.string.ip_address, "没有网络"));
             }
         });
     }
@@ -60,5 +85,11 @@ public class LANActivity extends BaseActivity {
     @Override
     protected void initData() {
 
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(networkStateReceiver);
     }
 }

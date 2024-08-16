@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">scannerwedgedemo</string>
 
     <string name="hint_usb_name">/dev/bus/usb/001/003</string>
@@ -15,6 +15,7 @@
     <string name="txt_id_3118_3649">ID 3118:3649</string>
     <string name="txt_baudrate">baudrate : </string>
     <string name="txt_115200">115200</string>
+    <string name="ip_address">IP:<xliff:g id="result">%s</xliff:g></string>
 
     <!-- Preference Titles -->
     <string name="barcode_scanner_header">Barcode Scanner</string>

@@ -3,6 +3,15 @@
 buildscript {
 
     repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/google'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/jcenter'
+        }
+        maven {
+            url 'https://maven.aliyun.com/nexus/content/groups/public'
+        }
         google()
         mavenCentral()
     }
@@ -16,8 +25,23 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url 'https://maven.aliyun.com/repository/google'
+        }
+        maven {
+            url 'https://maven.aliyun.com/repository/jcenter'
+        }
+        maven {
+            url 'https://maven.aliyun.com/nexus/content/groups/public'
+        }
         google()
         mavenCentral()
+    }
+
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs.add('-Xbootclasspath/p:app\\libs\\framework_android.jar;')
+        }
     }
 }
 
