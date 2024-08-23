@@ -1,5 +1,6 @@
 package com.advantech.scannerwedgedemo.module;
 
+import android.content.ComponentName;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
@@ -36,6 +37,7 @@ public class LANActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        startService();
         ethArray = getResources().getStringArray(R.array.ethernet_interface);
         Spinner ethernetEthSpinner = findViewById(R.id.ethernet_sp);
         ethernetEthSpinner.setSelection(0);
@@ -86,6 +88,20 @@ public class LANActivity extends BaseActivity {
         });
     }
 
+    private void startService() {
+        Intent intent = new Intent();
+        ComponentName componentName = new ComponentName("com.advantech.ethernetmanager", "com.advantech.ethernetmanager.EthernetManagerService");
+        intent.setComponent(componentName);
+        startService(intent);
+    }
+
+    private void stopService() {
+        Intent intent = new Intent();
+        ComponentName componentName = new ComponentName("com.advantech.ethernetmanager", "com.advantech.ethernetmanager.EthernetManagerService");
+        intent.setComponent(componentName);
+        stopService(intent);
+    }
+
     private void setStaticIp() {
         if (TextUtils.isEmpty(IPAddressText.getText())
                 || TextUtils.isEmpty(MaskText.getText())
@@ -121,5 +137,6 @@ public class LANActivity extends BaseActivity {
         super.onDestroy();
         Log.d(TAG, "unregisterReceiver");
         unregisterReceiver(networkStateReceiver);
+        stopService();
     }
 }
