@@ -73,9 +73,4 @@ private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
 
 
 
-如果要使用LAN模块则需要先安装EthernetManager_v1.0.1_release.apk，然后使用如下命令启动service
-
-```bash
-adb shell am startservice -n com.advantech.ethernetmanager/com.advantech.ethernetmanager.EthernetManagerService
-```
-
+如果要使用LAN模块则需要先安装EthernetManager_v1.0.1_release.apk
