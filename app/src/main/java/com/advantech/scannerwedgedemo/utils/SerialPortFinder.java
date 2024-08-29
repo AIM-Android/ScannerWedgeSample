@@ -22,7 +22,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.LineNumberReader;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 public class SerialPortFinder {
@@ -118,5 +120,23 @@ public class SerialPortFinder {
 			e.printStackTrace();
 		}
 		return devices.toArray(new String[devices.size()]);
+	}
+
+	public List<String> getSerialPorts() {
+		List<String> serialPorts = new ArrayList<>();
+		File[] files = new File("/dev/").listFiles();
+		if (files != null) {
+			for (File file : files) {
+				String fileName = file.getName();
+				if (fileName.startsWith("ttyS")
+						|| fileName.startsWith("ttyUSB")
+						|| fileName.startsWith("ttyACM")
+						|| fileName.startsWith("ttyMSM")
+						|| fileName.startsWith("ttyHS")) {
+					serialPorts.add("/dev/" + fileName);
+				}
+			}
+		}
+		return serialPorts;
 	}
 }

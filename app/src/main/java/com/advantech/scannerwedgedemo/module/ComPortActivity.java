@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 public class ComPortActivity extends BaseActivity {
 
@@ -74,7 +75,8 @@ public class ComPortActivity extends BaseActivity {
         });
         Spinner portSpinner = findViewById(R.id.port_sp);
         SerialPortFinder finder = new SerialPortFinder();
-        portArray = finder.getAllDevicesPath();
+        List<String> serialPorts = finder.getSerialPorts();
+        portArray = serialPorts.toArray(new String[serialPorts.size()]);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, portArray);
         portSpinner.setAdapter(adapter);
         portSpinner.setSelection(0);

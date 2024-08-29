@@ -29,9 +29,6 @@ public class NFCActivity extends BaseActivity {
     private NfcAdapter mNfcAdapter;
     private PendingIntent mPendingIntent;
     private IntentFilter[] mFilters;
-    private String[][] mTechList;
-
-    private String type;
 
     private TextView SNTextView, ATQATextView, SAKTextView, MAXTransceiveLengthTextView, supportArgumentTextView;
     private ListView listView;
@@ -66,25 +63,12 @@ public class NFCActivity extends BaseActivity {
             return;
         }
         Intent intent = new Intent(this, getClass());
-        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         mPendingIntent = getPendingIntentInstance(intent);
 
-        IntentFilter filter = new IntentFilter(NfcAdapter.ACTION_TECH_DISCOVERED);
-        try {
-            filter.addDataType("*/*");
-        } catch (IntentFilter.MalformedMimeTypeException exception) {
-            exception.printStackTrace();
-        }
+        IntentFilter filter = new IntentFilter(NfcAdapter.ACTION_TAG_DISCOVERED);
 
         mFilters = new IntentFilter[] {filter};
-        mTechList = new String[][] {
-                new String[] {IsoDep.class.getName()},
-                new String[] {MifareClassic.class.getName()}
-        };
-
-        if (adapter == null) {
-            adapter = new BlockAdapter(this);
-        }
     }
 
     private PendingIntent getPendingIntentInstance(Intent intent) {
@@ -149,7 +133,7 @@ public class NFCActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         if (mNfcAdapter != null) {
-            mNfcAdapter.enableForegroundDispatch(this, mPendingIntent, mFilters, mTechList);
+            mNfcAdapter.enableForegroundDispatch(this, mPendingIntent, mFilters, null);
         }
     }
 
