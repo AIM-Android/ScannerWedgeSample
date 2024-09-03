@@ -7,6 +7,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.advantech.scannerwedgedemo.baseui.BaseActivity;
@@ -20,6 +21,7 @@ public class UhfRfidActivity extends BaseActivity {
     private static final String ACTION_TRANSFER_DATA = "com.advantech.uhf.rfid.TRANSFER_DATA";
 
     private TextView textView;
+    private EditText editText;
 
     @Override
     protected int getLayoutResID() {
@@ -35,10 +37,13 @@ public class UhfRfidActivity extends BaseActivity {
             sendBroadcast(intent);
         });
 
+        editText = findViewById(R.id.rfid_edt);
+
         textView = findViewById(R.id.rfid_textview);
         textView.setOnLongClickListener(v -> {
             showToast("clear success");
             textView.setText("");
+            editText.setText("");
             return true;
         });
 

@@ -10,6 +10,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+    <Button style="@style/ButtonStyle"
+        android:id="@+id/bar_btn_trigger"
+        android:text="@string/txt_trigger_once_scan"
+        android:layout_gravity="center" />
+
+    <EditText
+        android:id="@+id/barcode_edt"
+        android:maxLines="5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <TextView
         android:id="@+id/bar_textview"
         android:textSize="16sp"
@@ -19,9 +30,4 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         tools:ignore="InefficientWeight,Suspicious0dp" />
-
-    <Button style="@style/ButtonStyle"
-        android:id="@+id/bar_btn_trigger"
-        android:text="@string/txt_trigger_once_scan"
-        android:layout_gravity="center" />
 </LinearLayout>

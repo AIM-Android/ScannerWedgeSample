@@ -30,6 +30,28 @@ private static final String ACTION_RESULT = "com.advantech.aim75.result";	// act
 
 #### 使用说明
 
+在使用LAN模块时需要安装 EthernetManagerService.apk，
+
+并且在 Sample app 的启动时启动该 service 
+```java
+private void startService() {
+    Intent intent = new Intent();
+    ComponentName componentName = new ComponentName("com.advantech.ethernetmanager", "com.advantech.ethernetmanager.EthernetManagerService");
+    intent.setComponent(componentName);
+    startService(intent);
+}
+```
+
+在 App 销毁时注销调该 service
+```java
+private void stopService() {
+        Intent intent = new Intent();
+        ComponentName componentName = new ComponentName("com.advantech.ethernetmanager", "com.advantech.ethernetmanager.EthernetManagerService");
+        intent.setComponent(componentName);
+        stopService(intent);
+    }
+```
+
 ```java
 // 在使用时需要发送广播并且携带IP信息
 // 设置静态IP
