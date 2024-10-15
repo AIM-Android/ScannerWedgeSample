@@ -69,6 +69,10 @@
             android:exported="false"
             android:label="Camera" />
         <activity
+            android:name=".module.MSRActivity"
+            android:exported="false"
+            android:label="MSR" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

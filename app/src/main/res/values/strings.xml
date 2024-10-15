@@ -44,4 +44,6 @@
     <string name="txt_support_argument">Support argument : </string>
     <string name="camera_header">Camera</string>
     <string name="camera_test_title">camera test</string>
+    <string name="msr_header">MSR</string>
+    <string name="msr_test_title">msr test</string>
 </resources>

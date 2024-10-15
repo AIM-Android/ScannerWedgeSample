@@ -91,4 +91,17 @@
                 android:targetPackage="com.advantech.scannerwedgedemo" />
         </Preference>
     </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/msr_header">
+
+        <Preference
+            android:key="camera"
+            android:title="@string/msr_test_title"
+            android:summary="">
+            <intent
+                android:action="com.advantech.scannerwedgedemo.MSRActivity.class"
+                android:targetClass="com.advantech.scannerwedgedemo.module.MSRActivity"
+                android:targetPackage="com.advantech.scannerwedgedemo" />
+        </Preference>
+    </PreferenceCategory>
 </PreferenceScreen>
