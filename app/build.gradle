@@ -59,6 +59,12 @@ android {
 }
 
 dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar","*.aar"])
+    implementation files('libs/Android_Print_SDK_ESC_V1.18.jar')
+    implementation 'com.google.zxing:android-core:3.3.0'
+    implementation 'com.google.zxing:core:3.3.0'
+    implementation('com.google.code.gson:gson:2.8.6')
+
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.preference:preference:1.2.0'
