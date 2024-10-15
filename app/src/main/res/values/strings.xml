@@ -42,4 +42,6 @@
     <string name="txt_sak">SAK :</string>
     <string name="txt_maxtransceivelength">MAXTransceiveLength :</string>
     <string name="txt_support_argument">Support argument : </string>
+    <string name="camera_header">Camera</string>
+    <string name="camera_test_title">camera test</string>
 </resources>

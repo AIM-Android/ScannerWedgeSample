@@ -19,6 +19,17 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.MAINLINE_NETWORK_STACK" />
 
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-feature android:name="android.hardware.camera.any" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -53,6 +64,10 @@
             android:name=".module.BarcodeScannerActivity"
             android:exported="false"
             android:label="BarcodeScanner" />
+        <activity
+            android:name=".module.CameraActivity"
+            android:exported="false"
+            android:label="Camera" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

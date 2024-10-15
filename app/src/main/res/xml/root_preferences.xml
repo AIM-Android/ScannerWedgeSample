@@ -78,4 +78,17 @@
                 android:targetPackage="com.advantech.scannerwedgedemo" />
         </Preference>
     </PreferenceCategory>
+
+    <PreferenceCategory app:title="@string/camera_header">
+
+        <Preference
+            android:key="camera"
+            android:title="@string/camera_test_title"
+            android:summary="">
+            <intent
+                android:action="com.advantech.scannerwedgedemo.CameraActivity.class"
+                android:targetClass="com.advantech.scannerwedgedemo.module.CameraActivity"
+                android:targetPackage="com.advantech.scannerwedgedemo" />
+        </Preference>
+    </PreferenceCategory>
 </PreferenceScreen>
