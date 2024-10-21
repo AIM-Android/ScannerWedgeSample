@@ -90,14 +90,14 @@ public class LANActivity extends BaseActivity {
 
     private void startService() {
         Intent intent = new Intent();
-        ComponentName componentName = new ComponentName("com.advantech.ethernetmanager", "com.advantech.ethernetmanager.EthernetManagerService");
+        ComponentName componentName = new ComponentName("com.advantech.peripheralmanager", "com.advantech.peripheralmanager.service.EthernetManagerService");
         intent.setComponent(componentName);
         startService(intent);
     }
 
     private void stopService() {
         Intent intent = new Intent();
-        ComponentName componentName = new ComponentName("com.advantech.ethernetmanager", "com.advantech.ethernetmanager.EthernetManagerService");
+        ComponentName componentName = new ComponentName("com.advantech.peripheralmanager", "com.advantech.peripheralmanager.service.EthernetManagerService");
         intent.setComponent(componentName);
         stopService(intent);
     }

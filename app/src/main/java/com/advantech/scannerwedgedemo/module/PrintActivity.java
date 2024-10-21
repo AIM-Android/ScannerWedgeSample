@@ -5,6 +5,8 @@ import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -32,13 +34,22 @@ public class PrintActivity extends BaseActivity implements YhInvoke.BTCallback {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        Button printButton = findViewById(R.id.print);
+        printButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (YhInvoke.isPrintConnected()) {
+                    printBT();
+                }
+            }
+        });
         YhInvoke.setBtCallback(this);
         checkPermission();
 
         if (!YhInvoke.isPrintConnected()) {
             connectBT();
         } else {
-            printBT();
+//            printBT();
         }
     }
 
@@ -131,6 +142,6 @@ public class PrintActivity extends BaseActivity implements YhInvoke.BTCallback {
 
     @Override
     public void printConnected() {
-        printBT();
+//        printBT();
     }
 }

@@ -48,4 +48,5 @@
     <string name="msr_test_title">msr test</string>
     <string name="print_header">Print</string>
     <string name="print_test_title">print test</string>
+    <string name="txt_print">print</string>
 </resources>

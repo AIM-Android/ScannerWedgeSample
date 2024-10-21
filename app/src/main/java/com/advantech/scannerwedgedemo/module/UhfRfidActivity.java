@@ -1,10 +1,13 @@
 package com.advantech.scannerwedgedemo.module;
 
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +33,7 @@ public class UhfRfidActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        startService();
         Button trigger = findViewById(R.id.rfid_btn_trigger);
         trigger.setOnClickListener(v -> {
             Intent intent = new Intent(ACTION_SCAN);
@@ -52,6 +56,20 @@ public class UhfRfidActivity extends BaseActivity {
         registerReceiver(broadcastReceiver, filter);
     }
 
+    private void startService() {
+        Intent intent = new Intent();
+        ComponentName componentName = new ComponentName("com.advantech.peripheralmanager", "com.advantech.peripheralmanager.service.FT230XService");
+        intent.setComponent(componentName);
+        startService(intent);
+    }
+
+    private void stopService() {
+        Intent intent = new Intent();
+        ComponentName componentName = new ComponentName("com.advantech.peripheralmanager", "com.advantech.peripheralmanager.service.FT230XService");
+        intent.setComponent(componentName);
+        stopService(intent);
+    }
+
     private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -72,5 +90,6 @@ public class UhfRfidActivity extends BaseActivity {
     protected void onDestroy() {
         unregisterReceiver(broadcastReceiver);
         super.onDestroy();
+        stopService();
     }
 }
