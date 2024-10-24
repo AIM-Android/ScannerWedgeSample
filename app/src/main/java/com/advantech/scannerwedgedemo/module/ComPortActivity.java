@@ -47,6 +47,7 @@ public class ComPortActivity extends BaseActivity {
     private String mPort;
 
     private boolean isOpen;
+    private boolean isConnected;
 
     private IComPortManager mService;
     private Spinner portSpinner;
@@ -54,12 +55,15 @@ public class ComPortActivity extends BaseActivity {
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            isConnected = true;
             mService = IComPortManager.Stub.asInterface(iBinder);
             initData();
+            controlButton.setEnabled(true);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {
+            isConnected = false;
             mService = null;
         }
     };
@@ -76,6 +80,7 @@ public class ComPortActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
+        isConnected = false;
         unbindService(serviceConnection);
     }
 
@@ -105,6 +110,7 @@ public class ComPortActivity extends BaseActivity {
         receiveTv = findViewById(R.id.receive_tv);
         comDataEdt = findViewById(R.id.com_data_edt);
         controlButton = findViewById(R.id.control_btn);
+        controlButton.setEnabled(false);
         controlButton.setOnClickListener(v -> {
             if ("open".equals(controlButton.getText())) {
                 try {
