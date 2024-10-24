@@ -1,6 +1,11 @@
 package com.advantech.scannerwedgedemo.module;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.advantech.peripheralmanager.IComPortManager;
 import com.advantech.scannerwedgedemo.baseui.BaseActivity;
 import com.advantech.scannerwedgedemo.R;
 import com.advantech.scannerwedgedemo.utils.SerialPortFinder;
@@ -22,19 +28,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ComPortActivity extends BaseActivity {
 
     private static final String TAG = "ComPortActivity";
-
-    private static final int BAUDRATE = 115200;
-    private static final String PORT = "/dev/ttyMSM1";
-
-    private FileDescriptor fd;
-
-    private InputStream mInputStream;
-    private OutputStream mOutputStream;
 
     private ReadingThread thread;
 
@@ -49,6 +48,37 @@ public class ComPortActivity extends BaseActivity {
 
     private boolean isOpen;
 
+    private IComPortManager mService;
+    private Spinner portSpinner;
+
+    private ServiceConnection serviceConnection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
+            mService = IComPortManager.Stub.asInterface(iBinder);
+            initData();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName componentName) {
+            mService = null;
+        }
+    };
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = new Intent();
+        intent.setComponent(new ComponentName("com.advantech.peripheralmanager",
+                "com.advantech.peripheralmanager.ComPortManagerService"));
+        bindService(intent, serviceConnection, Context.BIND_AUTO_CREATE);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        unbindService(serviceConnection);
+    }
+
     @Override
     protected int getLayoutResID() {
         return R.layout.activity_com_port;
@@ -57,8 +87,6 @@ public class ComPortActivity extends BaseActivity {
     @Override
     protected void initView(Bundle savedInstanceState) {
         baudrateArray = getResources().getStringArray(R.array.com_baudrate);
-//        portArray = getResources().getStringArray(R.array.com_interface);
-
         Spinner baudrateSpinner = findViewById(R.id.baudrate_sp);
         baudrateSpinner.setSelection(0);
         baudrateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -73,49 +101,43 @@ public class ComPortActivity extends BaseActivity {
 
             }
         });
-        Spinner portSpinner = findViewById(R.id.port_sp);
-        SerialPortFinder finder = new SerialPortFinder();
-        List<String> serialPorts = finder.getSerialPorts();
-        portArray = serialPorts.toArray(new String[serialPorts.size()]);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, portArray);
-        portSpinner.setAdapter(adapter);
-        portSpinner.setSelection(0);
-        portSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                mPort = "/dev/" + portArray[position];
-                mPort = portArray[position];
-                Log.d(TAG, "port : " + mPort);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        portSpinner = findViewById(R.id.port_sp);
         receiveTv = findViewById(R.id.receive_tv);
-
         comDataEdt = findViewById(R.id.com_data_edt);
         controlButton = findViewById(R.id.control_btn);
         controlButton.setOnClickListener(v -> {
             if ("open".equals(controlButton.getText())) {
-                if (openFileDescriptor()) {
-                    controlButton.setText("close");
-                    baudrateSpinner.setEnabled(false);
-                    portSpinner.setEnabled(false);
-                    mInputStream = new FileInputStream(fd);
-                    mOutputStream = new FileOutputStream(fd);
-                    isOpen = true;
-                    startReceivedThread();
+                try {
+                    if (mService.open(mPort, Integer.parseInt(mBaudrate)) == 0) {
+                        showToast("the serial port successfully opened");
+                        controlButton.setText("close");
+                        baudrateSpinner.setEnabled(false);
+                        portSpinner.setEnabled(false);
+                        isOpen = true;
+                        startReceivedThread();
+                    } else {
+                        showToast("the serial port opening failed");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+
             } else {
-                closeFileDescriptor();
-                baudrateSpinner.setEnabled(true);
-                portSpinner.setEnabled(true);
-                isOpen = false;
-                if (thread != null) {
-                    thread.interrupt();
-                    thread = null;
+                try {
+                    mService.close();
+                    controlButton.setText("open");
+                    comDataEdt.setText("");
+                    receiveTv.setText("");
+                    showToast("the serial port successfully closed");
+                    baudrateSpinner.setEnabled(true);
+                    portSpinner.setEnabled(true);
+                    isOpen = false;
+                    if (thread != null) {
+                        thread.interrupt();
+                        thread = null;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });
@@ -131,7 +153,29 @@ public class ComPortActivity extends BaseActivity {
 
     @Override
     protected void initData() {
+        List<String> serialPorts =  new ArrayList<>();
+        try {
+            serialPorts = mService.listPorts();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+        portArray = serialPorts.toArray(new String[serialPorts.size()]);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.spinner_item, portArray);
+        portSpinner.setAdapter(adapter);
+        portSpinner.setSelection(0);
+        portSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mPort = portArray[position];
+                Log.d(TAG, "port : " + mPort);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void sendData() {
@@ -157,8 +201,8 @@ public class ComPortActivity extends BaseActivity {
             @Override
             public void run() {
                 try {
-                    mOutputStream.write(new String(text).getBytes());
-                } catch (IOException e) {
+                    mService.write(new String(text).getBytes());
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -181,14 +225,11 @@ public class ComPortActivity extends BaseActivity {
             while (!isInterrupted() && isOpen) {
                 try {
                     byte[] buffer = new byte[64];
-                    if (mInputStream == null) {
-                        return;
+                    buffer = mService.read();
+                    if (buffer != null || buffer.length > 0) {
+                        onDataReceived(buffer, buffer.length);
                     }
-                    int size = mInputStream.read(buffer);
-                    if (size > 0) {
-                        onDataReceived(buffer, size);
-                    }
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -206,45 +247,15 @@ public class ComPortActivity extends BaseActivity {
         });
     }
 
-    private boolean openFileDescriptor() {
-        if (fd != null && fd.valid()) {
-            showToast("the serial port has been opened.");
-            return true;
-        }
-
-        FileDescriptor fileDescriptor = open(new File(mPort).getAbsolutePath(), Integer.parseInt(mBaudrate), 0);
-        if (fileDescriptor != null && fileDescriptor.valid()) {
-            fd = fileDescriptor;
-            showToast("the serial port successfully opened");
-            return true;
-        } else {
-            showToast("the serial port opening failed");
-            return false;
-        }
-    }
-
-    private void closeFileDescriptor() {
-        if (fd != null && fd.valid()) {
-            close(fd);
-            fd = null;
-            controlButton.setText("open");
-            comDataEdt.setText("");
-            receiveTv.setText("");
-            showToast("the serial port successfully closed");
-        }
-    }
-
     @Override
     protected void onDestroy() {
-        closeFileDescriptor();
+        try {
+            if (mService != null) {
+                mService.close();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         super.onDestroy();
-    }
-
-    private native FileDescriptor open(String path, int baudrate, int flags);
-
-    private native void close(FileDescriptor fd);
-
-    static {
-        System.loadLibrary("ComPort");
     }
 }
