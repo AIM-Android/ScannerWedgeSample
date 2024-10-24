@@ -79,42 +79,42 @@
         </Preference>
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="@string/camera_header">
+<!--    <PreferenceCategory app:title="@string/camera_header">-->
 
-        <Preference
-            android:key="camera"
-            android:title="@string/camera_test_title"
-            android:summary="">
-            <intent
-                android:action="com.advantech.scannerwedgedemo.CameraActivity.class"
-                android:targetClass="com.advantech.scannerwedgedemo.module.CameraActivity"
-                android:targetPackage="com.advantech.scannerwedgedemo" />
-        </Preference>
-    </PreferenceCategory>
+<!--        <Preference-->
+<!--            android:key="camera"-->
+<!--            android:title="@string/camera_test_title"-->
+<!--            android:summary="">-->
+<!--            <intent-->
+<!--                android:action="com.advantech.scannerwedgedemo.CameraActivity.class"-->
+<!--                android:targetClass="com.advantech.scannerwedgedemo.module.CameraActivity"-->
+<!--                android:targetPackage="com.advantech.scannerwedgedemo" />-->
+<!--        </Preference>-->
+<!--    </PreferenceCategory>-->
 
-    <PreferenceCategory app:title="@string/msr_header">
+<!--    <PreferenceCategory app:title="@string/msr_header">-->
 
-        <Preference
-            android:key="camera"
-            android:title="@string/msr_test_title"
-            android:summary="">
-            <intent
-                android:action="com.advantech.scannerwedgedemo.MSRActivity.class"
-                android:targetClass="com.advantech.scannerwedgedemo.module.MSRActivity"
-                android:targetPackage="com.advantech.scannerwedgedemo" />
-        </Preference>
-    </PreferenceCategory>
+<!--        <Preference-->
+<!--            android:key="camera"-->
+<!--            android:title="@string/msr_test_title"-->
+<!--            android:summary="">-->
+<!--            <intent-->
+<!--                android:action="com.advantech.scannerwedgedemo.MSRActivity.class"-->
+<!--                android:targetClass="com.advantech.scannerwedgedemo.module.MSRActivity"-->
+<!--                android:targetPackage="com.advantech.scannerwedgedemo" />-->
+<!--        </Preference>-->
+<!--    </PreferenceCategory>-->
 
-    <PreferenceCategory app:title="@string/print_header">
+<!--    <PreferenceCategory app:title="@string/print_header">-->
 
-        <Preference
-            android:key="camera"
-            android:title="@string/print_test_title"
-            android:summary="">
-            <intent
-                android:action="com.advantech.scannerwedgedemo.PrintActivity.class"
-                android:targetClass="com.advantech.scannerwedgedemo.module.PrintActivity"
-                android:targetPackage="com.advantech.scannerwedgedemo" />
-        </Preference>
-    </PreferenceCategory>
+<!--        <Preference-->
+<!--            android:key="camera"-->
+<!--            android:title="@string/print_test_title"-->
+<!--            android:summary="">-->
+<!--            <intent-->
+<!--                android:action="com.advantech.scannerwedgedemo.PrintActivity.class"-->
+<!--                android:targetClass="com.advantech.scannerwedgedemo.module.PrintActivity"-->
+<!--                android:targetPackage="com.advantech.scannerwedgedemo" />-->
+<!--        </Preference>-->
+<!--    </PreferenceCategory>-->
 </PreferenceScreen>
