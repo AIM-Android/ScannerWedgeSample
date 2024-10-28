@@ -11,6 +11,7 @@
         android:layout_height="wrap_content" />
 
     <Button style="@style/ButtonStyle"
+        android:visibility="gone"
         android:id="@+id/bar_btn_trigger"
         android:text="@string/txt_trigger_once_scan"
         android:layout_gravity="center" />
