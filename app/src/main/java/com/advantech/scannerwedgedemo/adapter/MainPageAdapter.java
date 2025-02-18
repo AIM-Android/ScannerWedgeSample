@@ -73,7 +73,8 @@ public class MainPageAdapter extends BaseAdapter {
                 }
             });
             if (CommonUtil.getProperty("ro.product.model", "").contains("AIM") && (
-                    MainPageData.CASHDRAWER.equals(bean.getTitle())
+                    MainPageData.PRINTER.equals(bean.getTitle())
+                    || MainPageData.CASHDRAWER.equals(bean.getTitle())
                     || MainPageData.LIGHT_BAR.equals(bean.getTitle())
                     || MainPageData.GPIO.equals(bean.getTitle()))) {
                 holder.layout.setEnabled(false);
