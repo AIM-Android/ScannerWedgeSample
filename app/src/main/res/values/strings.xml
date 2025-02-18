@@ -1,5 +1,5 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">scannerwedgedemo</string>
+    <string name="app_name">PeripheralIntegrationKit</string>
 
     <string name="hint_usb_name">/dev/bus/usb/001/003</string>
     <string name="hint_usb_item">Bus 001, Device 003, ID 3118:3649, Western Digital Technologies, Inc.</string>
@@ -49,4 +49,28 @@
     <string name="print_header">Print</string>
     <string name="print_test_title">print test</string>
     <string name="txt_print">print</string>
+    <string name="txt_peripheral_integration_kit">Peripheral Integration Kit</string>
+    <string name="txt_dashboard">"Dashboard"</string>
+    <string name="txt_peripheral_demo">Peripheral Demo</string>
+    <string name="barcode_header">Barcode</string>
+    <string name="rfid_header">RFID</string>
+    <string name="hint_title">Title</string>
+    <string name="txt_msr_reader">MSR Reader</string>
+    <string name="txt_please_swipe_a_valid_card">Please swipe a valid card.</string>
+    <string name="txt_please_action_the_barcode_trigger">Please action the barcode trigger.</string>
+    <string name="txt_barcode_reader">BarCode Reader</string>
+    <string name="txt_please_scan_a_tag">Please scan a tag.</string>
+    <string name="txt_nfc_tag_reader">NFC Tag Reader</string>
+    <string name="txt_vid_pid_id_devicename_usb_class">VID,PID,ID,DeviceName,USB Class</string>
+    <string name="txt_com_port_setting_parameters">COM Port Setting Parameters.</string>
+    <string name="txt_receive_windows">Receive Windows</string>
+    <string name="txt_send_windows">Send Windows</string>
+    <string name="txt_fill_ethernet_data">fill ethernet data</string>
+    <string name="txt_set_static_ip">set static ip</string>
+    <string name="txt_dhcp_open">dhcp open</string>
+    <string name="rfid_tag_reader">RFID Tag Reader</string>
+    <string name="txt_led">Led</string>
+    <string name="txt_blue_led">Blue LED</string>
+    <string name="txt_green_led">Green LED</string>
+    <string name="txt_red_led">Red LED</string>
 </resources>

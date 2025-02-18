@@ -1,34 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/ContainerStyle"
-    tools:context=".module.BarcodeScannerActivity">
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_gravity="center"
-        android:text="@string/tips_long_press_the_middle_of_the_screen_to_clear_it"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <include layout="@layout/include_title_bar" />
 
-    <Button style="@style/ButtonStyle"
-        android:visibility="gone"
-        android:id="@+id/bar_btn_trigger"
-        android:text="@string/txt_trigger_once_scan"
-        android:layout_gravity="center" />
-
-    <EditText
-        android:id="@+id/barcode_edt"
-        android:maxLines="5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/bar_textview"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+    <LinearLayout
+        android:orientation="vertical"
+        android:padding="16dp"
         android:layout_weight="1"
-        tools:ignore="InefficientWeight,Suspicious0dp" />
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+        <TextView style="@style/AppPrimaryTitleTextViewStyle"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="@string/txt_barcode_reader"
+            android:layout_width="match_parent" />
+
+        <EditText
+            android:id="@+id/barcode_edt"
+            android:background="@drawable/corner_background"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:padding="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            tools:ignore="Autofill,LabelFor,TextFields" />
+
+        <Button style="@style/AppButtonStyle"
+            android:id="@+id/clear_btn"
+            android:text="@string/txt_clear"
+            android:layout_gravity="right"
+            tools:ignore="RtlHardcoded" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="@color/color_005EB7"
+        android:layout_weight="1"
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp">
+
+        <ImageView
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/barcode"
+            android:background="@drawable/bg"
+            android:layout_marginTop="24dp"
+            android:layout_width="128dp"
+            android:layout_height="48dp"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:text="@string/txt_please_action_the_barcode_trigger"
+            android:textColor="@color/white"
+            android:layout_gravity="center_horizontal"
+            android:paddingVertical="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:src="@drawable/barcode_img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:ignore="ContentDescription" />
+    </LinearLayout>
 </LinearLayout>

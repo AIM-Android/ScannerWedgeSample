@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.advantech.scannerwedgedemo.R;
 import com.advantech.scannerwedgedemo.baseui.BaseActivity;
@@ -37,6 +38,8 @@ public class LANActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        TextView content = findViewById(R.id.content);
+        content.setText("-> Ethernet Demo");
         startService();
         ethArray = getResources().getStringArray(R.array.ethernet_interface);
         Spinner ethernetEthSpinner = findViewById(R.id.ethernet_sp);

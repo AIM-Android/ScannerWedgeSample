@@ -9,6 +9,7 @@ import android.hardware.usb.UsbManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.advantech.scannerwedgedemo.baseui.BaseActivity;
 import com.advantech.scannerwedgedemo.R;
@@ -37,6 +38,8 @@ public class USBDeviceActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        TextView content = findViewById(R.id.content);
+        content.setText("-> USB Demo");
         listView = findViewById(R.id.listview);
 
         IntentFilter filter = new IntentFilter();

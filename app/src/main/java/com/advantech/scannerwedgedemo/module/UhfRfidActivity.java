@@ -9,6 +9,7 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,7 +24,6 @@ public class UhfRfidActivity extends BaseActivity {
     private static final String ACTION_SCAN = "com.advantech.uhf.rfid.NFC_SCAN";
     private static final String ACTION_TRANSFER_DATA = "com.advantech.uhf.rfid.TRANSFER_DATA";
 
-    private TextView textView;
     private EditText editText;
 
     @Override
@@ -33,6 +33,8 @@ public class UhfRfidActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        TextView content = findViewById(R.id.content);
+        content.setText("-> RFID Demo");
         startService();
         Button trigger = findViewById(R.id.rfid_btn_trigger);
         trigger.setOnClickListener(v -> {
@@ -43,12 +45,12 @@ public class UhfRfidActivity extends BaseActivity {
 
         editText = findViewById(R.id.rfid_edt);
 
-        textView = findViewById(R.id.rfid_textview);
-        textView.setOnLongClickListener(v -> {
-            showToast("clear success");
-            textView.setText("");
-            editText.setText("");
-            return true;
+        Button clear = findViewById(R.id.clear_btn);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editText.setText("");
+            }
         });
 
         IntentFilter filter = new IntentFilter();
@@ -76,7 +78,7 @@ public class UhfRfidActivity extends BaseActivity {
             String barcodeData = intent.getStringExtra("scan_data");
             Log.d(TAG, "barcodeData : " + barcodeData);
             if (barcodeData != null) {
-                textView.append(barcodeData + "\n");
+                editText.append(barcodeData + "\n");
             }
         }
     };

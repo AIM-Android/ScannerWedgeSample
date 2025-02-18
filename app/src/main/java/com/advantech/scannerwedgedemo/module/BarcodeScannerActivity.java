@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,10 +18,6 @@ public class BarcodeScannerActivity extends BaseActivity {
 
     private static final String TAG = "BarcodeScannerActivity";
 
-    private static final String ACTION_TRANSFER_DATA = "com.advantech.scannerwedge.TRANSFER_DATA";
-    private static final String ACTION_TRIGGER_SCAN = "com.advantech.scannerwedge.TRIGGER_SCAN";
-
-    private TextView textView;
     private EditText editText;
 
     @Override
@@ -30,38 +27,19 @@ public class BarcodeScannerActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
-        Button trigger = findViewById(R.id.bar_btn_trigger);
-        trigger.setOnClickListener(v -> {
-            Intent intent = new Intent(ACTION_TRIGGER_SCAN);
-            intent.setFlags(Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
-            sendBroadcast(intent);
-        });
 
+        TextView content = findViewById(R.id.content);
+        content.setText("-> Barcode Demo");
         editText = findViewById(R.id.barcode_edt);
 
-        textView = findViewById(R.id.bar_textview);
-        textView.setOnLongClickListener(v -> {
-            showToast("clear success");
-            textView.setText("");
-            editText.setText("");
-            return true;
-        });
-
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(ACTION_TRANSFER_DATA);
-        registerReceiver(broadcastReceiver, filter);
-    }
-
-    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            String barcodeData = intent.getStringExtra("barcode_data");
-            Log.d(TAG, "barcodeData : " + barcodeData);
-            if (barcodeData != null) {
-                textView.append(barcodeData + "\n");
+        Button clear = findViewById(R.id.clear_btn);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                editText.setText("");
             }
-        }
-    };
+        });
+    }
 
     @Override
     protected void initData() {
@@ -70,7 +48,6 @@ public class BarcodeScannerActivity extends BaseActivity {
 
     @Override
     protected void onDestroy() {
-        unregisterReceiver(broadcastReceiver);
         super.onDestroy();
     }
 }

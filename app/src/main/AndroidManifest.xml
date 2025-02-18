@@ -46,20 +46,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Scannerwedgedemo">
         <activity
+            android:name=".module.GPIOActivity"
+            android:exported="false"
+            android:label="GPIO" />
+        <activity
+            android:name=".module.LightBarActivity"
+            android:exported="false"
+            android:label="LightBar" />
+        <activity
+            android:name=".module.CashDrawerActivity"
+            android:exported="false"
+            android:label="CashDrawer" />
+        <activity
             android:name=".module.NFCActivity"
             android:exported="false"
-            android:configChanges="orientation|screenSize"
             android:label="NFC" />
         <activity
             android:name=".module.LANActivity"
             android:exported="false"
-            android:configChanges="orientation|screenSize"
-            android:label="LAN" />
+            android:windowSoftInputMode="adjustPan"
+            android:label="Ethernet" />
         <activity
             android:name=".module.ComPortActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan"
-            android:configChanges="orientation|screenSize"
             android:label="ComPort" />
         <activity
             android:name=".module.USBDeviceActivity"
@@ -68,10 +78,12 @@
         <activity
             android:name=".module.UhfRfidActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustPan"
             android:label="UHF RFID" />
         <activity
             android:name=".module.BarcodeScannerActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustPan"
             android:label="BarcodeScanner" />
         <activity
             android:name=".module.CameraActivity"
@@ -80,6 +92,7 @@
         <activity
             android:name=".module.MSRActivity"
             android:exported="false"
+            android:windowSoftInputMode="adjustPan"
             android:label="MSR" />
 
         <activity

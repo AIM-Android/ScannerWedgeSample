@@ -8,4 +8,13 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="bold">#C3C0C0</color>
+
+    <color name="color_F8FBFF">#F8FBFF</color>
+    <color name="color_004280">#004280</color>
+    <color name="color_EAEBF9">#EAEBF9</color>
+    <color name="color_61646D">#61646D</color>
+    <color name="color_2B7CFF">#2B7CFF</color>
+    <color name="color_653CAE">#653CAE</color>
+    <color name="color_005EB7">#005EB7</color>
+    <color name="color_F0F0F0">#F0F0F0</color>
 </resources>

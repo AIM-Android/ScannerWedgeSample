@@ -8,6 +8,7 @@ import android.os.Environment;
 import android.util.Size;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.camera.core.Camera;
@@ -51,6 +52,9 @@ public class CameraActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+
+        TextView content = findViewById(R.id.content);
+        content.setText("-> Camera Demo");
 
         takePhotoButton = findViewById(R.id.take_photo);
         takePhotoButton.setOnClickListener(new View.OnClickListener() {

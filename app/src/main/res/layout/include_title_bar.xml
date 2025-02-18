@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/color_004280"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="4dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView style="@style/AppSubTitleTextViewStyle"
+        android:text="@string/txt_peripheral_integration_kit" />
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView style="@style/AppPrimaryTitleTextViewStyle"
+            android:text="@string/txt_dashboard" />
+
+        <View
+            android:layout_width="8dp"
+            android:layout_height="match_parent" />
+
+        <TextView style="@style/AppSubTitleTextViewStyle"
+            android:textStyle="bold"
+            android:id="@+id/content" />
+    </TableRow>
+</LinearLayout>

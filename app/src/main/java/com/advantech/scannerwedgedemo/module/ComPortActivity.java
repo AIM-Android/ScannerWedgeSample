@@ -91,6 +91,8 @@ public class ComPortActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        TextView content = findViewById(R.id.content);
+        content.setText("-> ComPort Demo");
         baudrateArray = getResources().getStringArray(R.array.com_baudrate);
         Spinner baudrateSpinner = findViewById(R.id.baudrate_sp);
         baudrateSpinner.setSelection(0);

@@ -10,6 +10,8 @@ import android.nfc.tech.MifareClassic;
 import android.nfc.tech.NfcA;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -42,6 +44,8 @@ public class NFCActivity extends BaseActivity {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        TextView content = findViewById(R.id.content);
+        content.setText("-> NFC Demo");
         SNTextView = findViewById(R.id.sn_tv);
         ATQATextView = findViewById(R.id.atqa_tv);
         SAKTextView = findViewById(R.id.sak_tv);
@@ -49,6 +53,22 @@ public class NFCActivity extends BaseActivity {
         supportArgumentTextView = findViewById(R.id.techlist_tv);
 
         listView = findViewById(R.id.listview);
+
+        Button clear = findViewById(R.id.clear_btn);
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SNTextView.setText("");
+                ATQATextView.setText("");
+                SAKTextView.setText("");
+                MAXTransceiveLengthTextView.setText("");
+                supportArgumentTextView.setText("");
+                if (adapter != null) {
+                    adapter.setDataList(null);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
     }
 
     @Override
