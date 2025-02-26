@@ -2,13 +2,20 @@ package com.advantech.scannerwedgedemo.module;
 
 import static android.content.pm.PackageManager.PERMISSION_GRANTED;
 
+import android.Manifest;
+import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
+import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -27,6 +34,10 @@ import java.util.Map;
 public class PrintActivity extends BaseActivity implements YhInvoke.BTCallback {
     private static final String TAG = PrintActivity.class.getSimpleName();
 
+    private static final int PICK_IMAGE_REQUEST = 200;
+
+    private ImageView selectImg;
+
     @Override
     protected int getLayoutResID() {
         return R.layout.activity_print;
@@ -34,6 +45,17 @@ public class PrintActivity extends BaseActivity implements YhInvoke.BTCallback {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+
+        selectImg = findViewById(R.id.select_img);
+        selectImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, PICK_IMAGE_REQUEST);
+            }
+        });
+
         Button printButton = findViewById(R.id.print);
         printButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +72,15 @@ public class PrintActivity extends BaseActivity implements YhInvoke.BTCallback {
             connectBT();
         } else {
 //            printBT();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
+            Uri imgUri = data.getData();
+            selectImg.setImageURI(imgUri);
         }
     }
 

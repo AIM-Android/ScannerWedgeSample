@@ -78,10 +78,6 @@ public class NFCActivity extends BaseActivity {
             showToast("Not support NFC.");
             return;
         }
-        if (!mNfcAdapter.isEnabled()) {
-            showToast("Please enable the NFC function first in the system settings.");
-            return;
-        }
         Intent intent = new Intent(this, getClass());
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TOP);
         mPendingIntent = getPendingIntentInstance(intent);
@@ -153,6 +149,10 @@ public class NFCActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         if (mNfcAdapter != null) {
+            if (!mNfcAdapter.isEnabled()) {
+                showToast("Please enable the NFC function first in the system settings.");
+                return;
+            }
             mNfcAdapter.enableForegroundDispatch(this, mPendingIntent, mFilters, null);
         }
     }

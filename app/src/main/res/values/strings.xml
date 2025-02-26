@@ -73,4 +73,13 @@
     <string name="txt_blue_led">Blue LED</string>
     <string name="txt_green_led">Green LED</string>
     <string name="txt_red_led">Red LED</string>
+    <string name="txt_printstring">PrintString</string>
+    <string name="txt_print_barcode">Print BarCode</string>
+    <string name="txt_print_picture">Print Picture</string>
+    <string name="txt_cut_pager">Cut Pager</string>
+    <string name="txt_align">Align:</string>
+    <string name="txt_character_size">Character Size:</string>
+    <string name="txt_set_position">Set position:</string>
+    <string name="txt_set_zoom">Set Zoom:</string>
+    <string name="txt_default">Default</string>
 </resources>

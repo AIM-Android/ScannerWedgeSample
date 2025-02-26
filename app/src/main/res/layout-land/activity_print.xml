@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/include_title_bar" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:background="@color/color_005EB7"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/printer"
+                android:background="@drawable/bg"
+                android:layout_marginTop="24dp"
+                android:layout_width="128dp"
+                android:layout_height="48dp"
+                tools:ignore="ContentDescription" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView style="@style/AppContentTextViewStyle"
+                        android:textColor="@color/white"
+                        android:text="@string/txt_align"
+                        android:paddingStart="4dp"
+                        android:layout_weight="1"
+                        android:layout_width="0dp" />
+
+                    <TextView style="@style/AppContentTextViewStyle"
+                        android:textColor="@color/white"
+                        android:text="@string/txt_character_size"
+                        android:paddingStart="4dp"
+                        android:layout_weight="1"
+                        android:layout_width="0dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText style="@style/AppContentTextViewStyle"
+                        android:background="@drawable/corner_background"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="4dp"
+                        android:padding="4dp"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:hint="@string/txt_default"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        tools:ignore="Autofill,LabelFor,TextFields" />
+
+                    <EditText style="@style/AppContentTextViewStyle"
+                        android:background="@drawable/corner_background"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:padding="4dp"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:hint="@string/txt_default"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        tools:ignore="Autofill,LabelFor,TextFields" />
+                </TableRow>
+            </TableLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView style="@style/AppContentTextViewStyle"
+                        android:textColor="@color/white"
+                        android:text="@string/txt_set_zoom"
+                        android:paddingStart="4dp"
+                        android:layout_weight="1"
+                        android:layout_width="0dp" />
+
+                    <TextView style="@style/AppContentTextViewStyle"
+                        android:textColor="@color/white"
+                        android:text="@string/txt_set_position"
+                        android:paddingStart="4dp"
+                        android:layout_weight="1"
+                        android:layout_width="0dp" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_marginTop="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText style="@style/AppContentTextViewStyle"
+                        android:background="@drawable/corner_background"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="4dp"
+                        android:padding="4dp"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:hint="@string/txt_default"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        tools:ignore="Autofill,LabelFor,TextFields" />
+
+                    <EditText style="@style/AppContentTextViewStyle"
+                        android:background="@drawable/corner_background"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="4dp"
+                        android:padding="4dp"
+                        android:lines="1"
+                        android:maxLines="1"
+                        android:hint="@string/txt_default"
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        tools:ignore="Autofill,LabelFor,TextFields" />
+                </TableRow>
+            </TableLayout>
+
+            <ImageView
+                android:src="@drawable/printer_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="ContentDescription" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent">
+            <Button style="@style/AppButtonStyle"
+                android:id="@+id/clear_btn"
+                android:text="@string/txt_clear"
+                android:backgroundTint="@color/teal_200"
+                android:layout_gravity="right"
+                tools:ignore="RtlHardcoded" />
+
+            <TextView style="@style/AppContentTextViewStyle"
+                android:textColor="@color/black"
+                android:text="@string/txt_printstring"
+                android:layout_width="match_parent" />
+
+            <EditText
+                android:background="@drawable/corner_background"
+                android:layout_gravity="center"
+                android:padding="4dp"
+                android:layout_margin="2dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="Autofill,LabelFor,TextFields" />
+
+            <TextView style="@style/AppContentTextViewStyle"
+                android:textColor="@color/black"
+                android:text="@string/txt_print_barcode"
+                android:layout_width="match_parent" />
+
+            <EditText
+                android:background="@drawable/corner_background"
+                android:layout_gravity="center"
+                android:padding="4dp"
+                android:layout_margin="2dp"
+                android:lines="1"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:ignore="Autofill,LabelFor,TextFields" />
+
+            <TextView style="@style/AppContentTextViewStyle"
+                android:textColor="@color/black"
+                android:text="@string/txt_print_picture"
+                android:layout_width="match_parent" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id="@+id/select_img"
+                    android:src="@drawable/img_print"
+                    android:layout_margin="8dp"
+                    android:layout_width="128dp"
+                    android:layout_height="128dp" />
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <Button style="@style/AppButtonStyle"
+                        android:id="@+id/cut_pager_btn"
+                        android:text="@string/txt_cut_pager"
+                        android:backgroundTint="@color/teal_200"
+                        android:layout_width="120dp" />
+
+                    <Button style="@style/AppButtonStyle"
+                        android:id="@+id/print"
+                        android:text="@string/txt_print"
+                        android:backgroundTint="@color/teal_200"
+                        android:layout_width="120dp" />
+
+                </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
