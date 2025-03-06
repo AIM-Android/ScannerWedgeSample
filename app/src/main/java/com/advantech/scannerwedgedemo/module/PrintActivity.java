@@ -1,42 +1,43 @@
 package com.advantech.scannerwedgedemo.module;
 
-import static android.content.pm.PackageManager.PERMISSION_GRANTED;
-
-import android.Manifest;
-import android.app.Activity;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
-
-import androidx.annotation.IntDef;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import com.advantech.scannerwedgedemo.R;
 import com.advantech.scannerwedgedemo.baseui.BaseActivity;
+import com.advantech.scannerwedgedemo.bean.ImageData;
+import com.advantech.scannerwedgedemo.bean.QrcodeData;
+import com.advantech.scannerwedgedemo.bean.TextData;
+import com.advantech.scannerwedgedemo.utils.FileUtil;
 import com.advantech.scannerwedgedemo.utils.print.YhInvoke;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import print.Print;
 
 /**
  * time   : 2024/10/15
  * desc   : Print
  * version: 1.0
  */
-public class PrintActivity extends BaseActivity implements YhInvoke.BTCallback {
+public class PrintActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = PrintActivity.class.getSimpleName();
 
     private static final int PICK_IMAGE_REQUEST = 200;
 
-    private ImageView selectImg;
+    private EditText stringEdt, barCodeEdt, alignEdt, sizeEdt, zoomEdt, positionEdt;
+
+    private Gson gson;
 
     @Override
     protected int getLayoutResID() {
@@ -45,43 +46,100 @@ public class PrintActivity extends BaseActivity implements YhInvoke.BTCallback {
 
     @Override
     protected void initView(Bundle savedInstanceState) {
+        TextView content = findViewById(R.id.content);
+        content.setText("-> Print Demo");
 
-        selectImg = findViewById(R.id.select_img);
-        selectImg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, PICK_IMAGE_REQUEST);
-            }
-        });
+        Button clear = findViewById(R.id.clear_btn);
+        clear.setOnClickListener(this);
 
         Button printButton = findViewById(R.id.print);
-        printButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (YhInvoke.isPrintConnected()) {
-                    printBT();
-                }
-            }
-        });
-        YhInvoke.setBtCallback(this);
-        checkPermission();
+        printButton.setOnClickListener(this);
+
+        stringEdt = findViewById(R.id.stringdata_edt);
+        barCodeEdt = findViewById(R.id.barcode_edt);
+        alignEdt = findViewById(R.id.align_edt);
+        sizeEdt = findViewById(R.id.charsize_edt);
+        zoomEdt = findViewById(R.id.setzoom_edt);
+        positionEdt = findViewById(R.id.position_edt);
+
+        zoomEdt.setEnabled(false);
+        positionEdt.setEnabled(false);
+        barCodeEdt.setText("https://www.advantech.com");
+
+        Button cutPaper = findViewById(R.id.cut_pager_btn);
+        cutPaper.setOnClickListener(this);
 
         if (!YhInvoke.isPrintConnected()) {
             connectBT();
-        } else {
-//            printBT();
+        }
+
+        gson = new GsonBuilder().create();
+    }
+
+    private void connectBT() {
+        try {
+            Map<String,String> map=new HashMap<>();
+            map.put("method","testPrint");
+            YhInvoke.execute(this,"", map);
+        } catch (Exception e) {
+            Log.e(TAG, "connectBT : " + e.getMessage());
         }
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK && data != null) {
-            Uri imgUri = data.getData();
-            selectImg.setImageURI(imgUri);
+    public void onClick(View view) {
+        if (R.id.print == view.getId()) {
+            if (TextUtils.isEmpty(stringEdt.getText())) {
+                showToast("Text input cannot be empty.");
+                return;
+            }
+
+            if (TextUtils.isEmpty(barCodeEdt.getText())) {
+                showToast("The QR code barcode cannot be empty.");
+                return;
+            }
+
+            if (TextUtils.isEmpty(alignEdt.getText())) {
+                showToast("The alignment method cannot be empty.");
+                return;
+            }
+
+            if (TextUtils.isEmpty(sizeEdt.getText())) {
+                showToast("Font size cannot be empty.");
+                return;
+            }
+            print();
+        } else if (R.id.cut_pager_btn == view.getId()) {
+            try {
+                Print.CutPaper(1, 10);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            Log.e(TAG, "onclick error.");
         }
+    }
+
+    private void print() {
+        TextData textData = new TextData();
+        TextData.TextTitle textTitle = new TextData.TextTitle();
+        textTitle.setData(stringEdt.getText().toString());
+        textTitle.setAlign(Integer.parseInt(alignEdt.getText().toString()));
+        textTitle.setFont(Integer.parseInt(sizeEdt.getText().toString()));
+        textData.setTxt(textTitle);
+
+        QrcodeData qrcodeData = new QrcodeData();
+        QrcodeData.Qrcode qrcode = new QrcodeData.Qrcode();
+        qrcode.setData(barCodeEdt.getText().toString());
+        qrcodeData.setQrCode(qrcode);
+
+        JsonArray jsonArray = new JsonArray();
+        JsonElement textElement = gson.toJsonTree(textData);
+        JsonElement qrcodeElement = gson.toJsonTree(qrcodeData);
+
+        jsonArray.add(textElement);
+        jsonArray.add(qrcodeElement);
+        printBT(jsonArray.toString());
     }
 
     @Override
@@ -89,90 +147,14 @@ public class PrintActivity extends BaseActivity implements YhInvoke.BTCallback {
 
     }
 
-    private void checkPermission() {
-        if (Build.VERSION.SDK_INT > 30) {
-            if (ContextCompat.checkSelfPermission(this,
-                    "android.permission.BLUETOOTH_SCAN") != PERMISSION_GRANTED
-                    || ContextCompat.checkSelfPermission(this,
-                    "android.permission.BLUETOOTH_ADVERTISE") != PERMISSION_GRANTED
-                    || ContextCompat.checkSelfPermission(this,
-                    "android.permission.BLUETOOTH_CONNECT") != PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{
-                        "android.permission.BLUETOOTH_SCAN",
-                        "android.permission.BLUETOOTH_ADVERTISE",
-                        "android.permission.BLUETOOTH_CONNECT"}, 1);
-            } else {
-                if (!YhInvoke.isPrintConnected()) connectBT();
-            }
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (!YhInvoke.isPrintConnected()) connectBT();
-    }
-
-    private void connectBT() {
+    private void printBT(String data) {
         try {
-            Map<String, String> map = new HashMap<>();
-            map.put("method", "testPrint");
+            Map<String,String> map = new HashMap<>();
+            map.put("method", "print");
+            map.put("params", data);
             YhInvoke.execute(this, "", map);
         } catch (Exception e) {
-            Log.e(TAG, e.toString());
-            e.printStackTrace();
+            Log.e(TAG, "printBT : " + e.getMessage());
         }
-    }
-
-    private void printBT() {
-        String printdata = "[" +
-                "{\"img\":{\"src\":\"CRLandImposRes/printLogo/2400034001.bmp\",\"offset\":\"0\",\"width\":\"384\",\"height\":\"98\"}}," +
-                "{\"txt-title\":{\"data\":\"                    sales slip\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"              [Customer Connection]\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-splitLine\":{\"data\":\"·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-\",\"align\":\"1\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"Merchant Name:KELME\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"Merchant ID:L0406N01\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"Mall name:Advantech\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"Shopping mall number:2YRJ00201\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"Cash register number:01\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"cashier:2yrj00201l0406n0101\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"Serial number:22010001\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"Transaction Date:2023/12/22 12:00:13 \",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"Print date:2023/12/22 12:00:17\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"barCode\":{\"data\":\"0124000340231222010001\",\"align\":\"1\",\"width\":\"280\",\"height\":\"60\"}}," +
-                "{\"txt-splitLine\":{\"data\":\"·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-\",\"align\":\"1\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"Product          quantity     amount of money(RMB)\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-splitLine\":{\"data\":\"·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-\",\"align\":\"1\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"Payment records             amount of money(RMB)\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-splitLine\":{\"data\":\"·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-\",\"align\":\"1\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"VIP card number:138****4089\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-splitLine\":{\"data\":\"·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-\",\"align\":\"1\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"                 Alipay sales slip\",\"align\":\"1\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"Card number:289339*** **8678\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"Authorization code:\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"Reference number:903562774242\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"Voucher number:000515\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"External order number:0054531141890160Ymc0s\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-title\":{\"data\":\"amount of money:277\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-splitLine\":{\"data\":\"·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-\",\"align\":\"1\",\"font\":\"1\"}}," +
-                "{\"qrCode\":{\"data\":\"https://www.advantech.com\",\"offset\":\"20\",\"length\":\"350\"}}," +
-                "{\"txt-title\":{\"data\":\" \",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"txt-splitLine\":{\"data\":\"·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-·-\",\"align\":\"1\",\"font\":\"1\"}}," +
-//                "{\"txt-title\":{\"data\":\"reminder：\\nThis QR code can be used for self-service star collection on the Advantech app/Wanxiang mini program, or for collecting stars at the mall service desk with receipts (valid on the same day)\\nPlease keep this ticket as the only purchase voucher\",\"align\":\"0\",\"font\":\"1\"}}," +
-                "{\"cut\":{\"data\":\"\"}}]";
-        try {
-            Map<String,String> map=new HashMap<>();
-            map.put("method", "print");
-            map.put("params", printdata);
-            YhInvoke.execute(this,"", map);
-        } catch (Exception e) {
-            Log.e(TAG, e.toString());
-            e.printStackTrace();
-        }
-    }
-
-    @Override
-    public void printConnected() {
-//        printBT();
     }
 }

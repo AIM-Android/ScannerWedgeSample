@@ -168,6 +168,7 @@ public class YhPrintMain {
                     if (key.indexOf("txt") == 0) {
                         String txt = "";
                         String titleAlign = "";
+                        String txtSize = "";
                         JSONObject spaceXY = null;
                         JSONObject titleFontFormat = null;
 
@@ -184,14 +185,15 @@ public class YhPrintMain {
                             }
 
                             if (titleKey.indexOf("font") == 0) {
+                                txtSize = titleObj.optString(titleKey);
                             }
                         }
-                        int alignment = 0;//0:左对齐，1：居中，2：右对齐
+                        int alignment = Integer.parseInt(titleAlign);//0:左对齐，1：居中，2：右对齐
                         int attribute = 0;
-                        int textSize = 0;
-//                        Print.PrintText(txt, alignment, attribute, textSize);
-                        Print.SetJustification(0);
-                        Print.PrintText(txt + "\n");
+                        int textSize = Integer.parseInt(txtSize);
+                        Print.PrintText(txt, alignment, attribute, textSize);
+//                        Print.SetJustification(0);
+//                        Print.PrintText(txt + "\n");
                     }
                     //barCode
                     if (key.indexOf("barCode") == 0) {

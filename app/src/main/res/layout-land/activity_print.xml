@@ -59,6 +59,8 @@
                     android:layout_height="wrap_content">
 
                     <EditText style="@style/AppContentTextViewStyle"
+                        android:id="@+id/align_edt"
+                        android:inputType="number"
                         android:background="@drawable/corner_background"
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
@@ -72,6 +74,8 @@
                         tools:ignore="Autofill,LabelFor,TextFields" />
 
                     <EditText style="@style/AppContentTextViewStyle"
+                        android:id="@+id/charsize_edt"
+                        android:inputType="number"
                         android:background="@drawable/corner_background"
                         android:layout_gravity="center"
                         android:layout_marginStart="4dp"
@@ -114,6 +118,8 @@
                     android:layout_height="wrap_content">
 
                     <EditText style="@style/AppContentTextViewStyle"
+                        android:id="@+id/setzoom_edt"
+                        android:inputType="number"
                         android:background="@drawable/corner_background"
                         android:layout_gravity="center"
                         android:layout_marginEnd="4dp"
@@ -127,6 +133,8 @@
                         tools:ignore="Autofill,LabelFor,TextFields" />
 
                     <EditText style="@style/AppContentTextViewStyle"
+                        android:id="@+id/position_edt"
+                        android:inputType="number"
                         android:background="@drawable/corner_background"
                         android:layout_gravity="center"
                         android:layout_marginStart="4dp"
@@ -166,6 +174,7 @@
                 android:layout_width="match_parent" />
 
             <EditText
+                android:id="@+id/stringdata_edt"
                 android:background="@drawable/corner_background"
                 android:layout_gravity="center"
                 android:padding="4dp"
@@ -182,6 +191,7 @@
                 android:layout_width="match_parent" />
 
             <EditText
+                android:id="@+id/barcode_edt"
                 android:background="@drawable/corner_background"
                 android:layout_gravity="center"
                 android:padding="4dp"
