@@ -46,7 +46,7 @@ public class YhInvoke {
                         if (btCallback != null) {
                             btCallback.printConnected();
                         }
-                        ToastUtil.show(activity, "Bluetooth connected.", Gravity.CENTER, 0);
+                        ToastUtil.show(activity, "Bluetooth connected.", Gravity.BOTTOM, 0);
                     }
                     break;
                 case "print":
@@ -57,12 +57,12 @@ public class YhInvoke {
                     if (print.isPrintConnected()) {
                         boolean printResult = print.printBill(activity, printDataArray);
                         if (printResult) {
-                            ToastUtil.show(activity, "Printing successful.", Gravity.CENTER, 0);
+                            ToastUtil.show(activity, "Printing successful.", Gravity.BOTTOM, 0);
                         } else {
-                            ToastUtil.show(activity, "Printing failed.", Gravity.CENTER, 0);
+                            ToastUtil.show(activity, "Printing failed.", Gravity.BOTTOM, 0);
                         }
                     } else {
-                        ToastUtil.show(activity, "Printer connection failed.", Gravity.CENTER, 0);
+                        ToastUtil.show(activity, "Printer connection failed.", Gravity.BOTTOM, 0);
                     }
                 default:
                     break;

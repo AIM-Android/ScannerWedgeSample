@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.advantech.scannerwedgedemo.R;
 import com.advantech.scannerwedgedemo.baseui.BaseActivity;
-import com.advantech.scannerwedgedemo.bean.ImageData;
 import com.advantech.scannerwedgedemo.bean.QrcodeData;
 import com.advantech.scannerwedgedemo.bean.TextData;
 import com.advantech.scannerwedgedemo.utils.FileUtil;
@@ -36,7 +35,6 @@ public class PrintActivity extends BaseActivity implements View.OnClickListener 
     private static final int PICK_IMAGE_REQUEST = 200;
 
     private EditText stringEdt, barCodeEdt, alignEdt, sizeEdt, zoomEdt, positionEdt;
-
     private Gson gson;
 
     @Override

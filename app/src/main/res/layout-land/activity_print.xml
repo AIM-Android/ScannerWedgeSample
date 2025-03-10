@@ -211,12 +211,6 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                <ImageView
-                    android:id="@+id/select_img"
-                    android:src="@drawable/img_print"
-                    android:layout_margin="8dp"
-                    android:layout_width="128dp"
-                    android:layout_height="128dp" />
 
                 <LinearLayout
                     android:orientation="vertical"

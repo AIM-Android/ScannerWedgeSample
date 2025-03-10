@@ -50,22 +50,22 @@ public class YhPrintMain {
                     mAddress = addrs[0];
                     int result = Print.PortOpen(activity, "Bluetooth," + mAddress);
                     if (result == 0) {
-                        ToastUtil.show(activity, "Bluetooth connection successful,result=", Gravity.CENTER, 0);
+                        ToastUtil.show(activity, "Bluetooth connection successful,result=", Gravity.BOTTOM, 0);
                         PrinterHelper.isWriteLog=true;
                         PrinterHelper.isHex=true;
                         Print.BeepBuzzer((byte)1,(byte)5,(byte)1);
                         return true;
                     } else {
-                        ToastUtil.show(activity, "Bluetooth connection failed, please check；result=", Gravity.CENTER, 0);
+                        ToastUtil.show(activity, "Bluetooth connection failed, please check；result=", Gravity.BOTTOM, 0);
                     }
                 } else {
-                    ToastUtil.show(activity, "No available Bluetooth found nearby address，check on", Gravity.CENTER, 0);
+                    ToastUtil.show(activity, "No available Bluetooth found nearby address，check on", Gravity.BOTTOM, 0);
                 }
             } else {
-                ToastUtil.show(activity, "No Bluetooth device hardware found nearby, please check (pairing)", Gravity.CENTER, 0);
+                ToastUtil.show(activity, "No Bluetooth device hardware found nearby, please check (pairing)", Gravity.BOTTOM, 0);
             }
         } catch (Exception e) {
-            ToastUtil.show(activity,"Failed to obtain Bluetooth device, please check"+e.getMessage(), Gravity.CENTER, 0);
+            ToastUtil.show(activity,"Failed to obtain Bluetooth device, please check"+e.getMessage(), Gravity.BOTTOM, 0);
             e.printStackTrace();
         }
         return false;

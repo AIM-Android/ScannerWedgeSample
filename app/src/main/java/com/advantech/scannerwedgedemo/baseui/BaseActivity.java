@@ -49,7 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void showToast(String message) {
-        ToastUtil.show(this, message, Gravity.CENTER, Toast.LENGTH_SHORT);
+        ToastUtil.show(this, message, Gravity.BOTTOM, Toast.LENGTH_SHORT);
     }
 
     protected void cancelToast() {
