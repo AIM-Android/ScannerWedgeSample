@@ -20,6 +20,12 @@
             android:layout_width="match_parent"
             android:layout_height="200dp" />
 
+        <TextView style="@style/AppContentTextViewStyle"
+            android:gravity="center"
+            android:text="photo:/Android/data/packagename/files/TestPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <TableRow
             android:gravity="center"
             android:paddingVertical="8dp"
