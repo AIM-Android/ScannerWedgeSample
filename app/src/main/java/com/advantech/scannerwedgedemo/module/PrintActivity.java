@@ -113,6 +113,9 @@ public class PrintActivity extends BaseActivity implements View.OnClickListener 
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        } else if (R.id.clear_btn == view.getId()) {
+            stringEdt.setText("");
+            barCodeEdt.setText("");
         } else {
             Log.e(TAG, "onclick error.");
         }
