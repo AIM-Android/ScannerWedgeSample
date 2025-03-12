@@ -84,6 +84,11 @@ public class MainPageAdapter extends BaseAdapter {
                     holder.layout.setEnabled(false);
                     holder.layout.setBackground(context.getDrawable(R.drawable.disable_background));
                 }
+                if (!CommonUtil.getProperty("ro.product.model", "").contains("AIM-75")
+                        && MainPageData.RFID.equals(bean.getTitle())) {
+                    holder.layout.setEnabled(false);
+                    holder.layout.setBackground(context.getDrawable(R.drawable.disable_background));
+                }
             }
             holder.imageResource.setImageResource(bean.getDrawableId());
             holder.title.setText(bean.getTitle());
