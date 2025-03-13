@@ -10,10 +10,10 @@
     <string name="txt_close">close</string>
     <string name="txt_clear">clear</string>
     <string name="txt_send">send</string>
-    <string name="txt_port">port :</string>
+    <string name="txt_port">COM Port</string>
     <string name="txt_manufacturername">Western Digital Technologies, Inc.</string>
     <string name="txt_id_3118_3649">ID 3118:3649</string>
-    <string name="txt_baudrate">baudrate : </string>
+    <string name="txt_baudrate">BaudRate</string>
     <string name="txt_115200">115200</string>
     <string name="ip_address">IP:<xliff:g id="result">%s</xliff:g></string>
     <string name="hint_ip_address_such_as_192_168_10_100">IP address, such as 192.168.10.100</string>

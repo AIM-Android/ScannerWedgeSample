@@ -15,7 +15,7 @@
             android:orientation="vertical"
             android:background="@color/color_005EB7"
             android:layout_weight="1"
-            android:padding="16dp"
+            android:padding="8dp"
             android:layout_width="0dp"
             android:layout_height="match_parent">
 
@@ -41,10 +41,10 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_weight="1"
-            android:padding="16dp"
+            android:padding="8dp"
             android:layout_width="0dp"
             android:layout_height="match_parent">
-            <TextView style="@style/AppPrimaryTitleTextViewStyle"
+            <TextView style="@style/AppSubTitleTextViewStyle"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:text="@string/txt_vid_pid_id_devicename_usb_class"
@@ -53,7 +53,6 @@
             <ListView
                 android:id="@+id/listview"
                 android:background="@drawable/corner_background"
-                android:layout_margin="4dp"
                 android:padding="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

@@ -72,20 +72,21 @@ public class MainPageAdapter extends BaseAdapter {
                     }
                 }
             });
-            if (CommonUtil.getProperty("ro.product.model", "").contains("AIM")) {
+            String productModel = CommonUtil.getProperty("ro.product.model", "") + "/"
+                    + CommonUtil.getProperty("ro.build.display.id", "");
+            if (productModel.contains("AIM")) {
                 if (MainPageData.CASHDRAWER.equals(bean.getTitle())
                         || MainPageData.LIGHT_BAR.equals(bean.getTitle())
                         || MainPageData.GPIO.equals(bean.getTitle())) {
                     holder.layout.setEnabled(false);
                     holder.layout.setBackground(context.getDrawable(R.drawable.disable_background));
                 }
-                if (!CommonUtil.getProperty("ro.product.model", "").contains("AIM-37PLUS")
-                        && MainPageData.PRINTER.equals(bean.getTitle())) {
+                boolean isAIM77 = productModel.contains("AIM-37PLUS") || productModel.contains("AIM-77");
+                if (!isAIM77 && MainPageData.PRINTER.equals(bean.getTitle())) {
                     holder.layout.setEnabled(false);
                     holder.layout.setBackground(context.getDrawable(R.drawable.disable_background));
                 }
-                if (!CommonUtil.getProperty("ro.product.model", "").contains("AIM-75")
-                        && MainPageData.RFID.equals(bean.getTitle())) {
+                if (isAIM77 && MainPageData.RFID.equals(bean.getTitle())) {
                     holder.layout.setEnabled(false);
                     holder.layout.setBackground(context.getDrawable(R.drawable.disable_background));
                 }

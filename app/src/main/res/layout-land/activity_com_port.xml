@@ -15,7 +15,7 @@
             android:orientation="vertical"
             android:background="@color/color_005EB7"
             android:layout_weight="1"
-            android:padding="16dp"
+            android:padding="8dp"
             android:layout_width="0dp"
             android:layout_height="match_parent">
 
@@ -45,10 +45,10 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_weight="1"
-            android:padding="16dp"
+            android:padding="8dp"
             android:layout_width="0dp"
             android:layout_height="match_parent">
-            <TextView style="@style/AppPrimaryTitleTextViewStyle"
+            <TextView style="@style/AppSubTitleTextViewStyle"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:text="@string/txt_send_windows"
@@ -57,7 +57,6 @@
             <EditText
                 android:id="@+id/com_data_edt"
                 android:background="@drawable/corner_background"
-                android:layout_margin="4dp"
                 android:padding="4dp"
                 android:maxLines="2"
                 android:lines="2"
@@ -69,10 +68,10 @@
                 android:padding="2dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-                <TextView style="@style/AppPrimaryTitleTextViewStyle"
+                <TextView style="@style/AppContentTextViewStyle"
                     android:text="@string/txt_baudrate"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
@@ -90,12 +89,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
+                <TextView style="@style/AppContentTextViewStyle"
                     android:text="@string/txt_port"
-                    android:textSize="16sp"
                     android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:paddingVertical="4dp"
+                    android:layout_gravity="center_vertical"
                     android:layout_weight="1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" />
@@ -129,7 +126,7 @@
                     tools:ignore="RtlHardcoded" />
             </TableRow>
 
-            <TextView style="@style/AppPrimaryTitleTextViewStyle"
+            <TextView style="@style/AppSubTitleTextViewStyle"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:text="@string/txt_receive_windows"
@@ -138,7 +135,6 @@
             <TextView
                 android:id="@+id/receive_tv"
                 android:background="@drawable/corner_background"
-                android:layout_margin="4dp"
                 android:padding="4dp"
                 android:maxLines="3"
                 android:lines="3"

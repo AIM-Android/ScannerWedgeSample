@@ -59,6 +59,7 @@
     <style name="AppButtonStyle" parent="AppContentTextViewStyle">
         <item name="android:textColor">@color/color_EAEBF9</item>
         <item name="android:textAllCaps">false</item>
+        <item name="android:layout_height">42dp</item>
     </style>
 
     <style name="AppContentTextViewStyle" parent="AppTextViewStyle_Base"/>

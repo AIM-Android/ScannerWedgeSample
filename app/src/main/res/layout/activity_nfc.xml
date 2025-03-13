@@ -9,11 +9,11 @@
 
     <LinearLayout
         android:orientation="vertical"
-        android:padding="16dp"
+        android:padding="8dp"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="0dp">
-        <TextView style="@style/AppPrimaryTitleTextViewStyle"
+        <TextView style="@style/AppSubTitleTextViewStyle"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:text="@string/txt_nfc_tag_reader"
@@ -22,8 +22,7 @@
         <LinearLayout
             android:orientation="vertical"
             android:background="@drawable/corner_background"
-            android:layout_margin="8dp"
-            android:padding="8dp"
+            android:padding="4dp"
             android:layout_width="match_parent"
             android:layout_height="200dp">
             <TextView style="@style/AppContentTextViewStyle"
@@ -74,7 +73,7 @@
         android:orientation="vertical"
         android:background="@color/color_005EB7"
         android:layout_weight="1"
-        android:padding="16dp"
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="0dp">
 
