@@ -1,10 +1,14 @@
 package com.advantech.scannerwedgedemo.module;
 
 import android.Manifest;
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.util.Size;
 import android.view.View;
 import android.widget.ImageView;
@@ -26,6 +30,8 @@ import com.google.common.util.concurrent.ListenableFuture;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 /**
  * time   : 2024/10/15
@@ -125,38 +131,33 @@ public class CameraActivity extends BaseActivity {
     }
 
     private void takePhoto() {
-        if (mImageCapture != null) {
-            String dirPath = getExternalFilesDir("").getAbsolutePath()
-                    + File.separator + "TestPhoto";
-            File dirFile = new File(dirPath);
-            if (!dirFile.exists()) {
-                dirFile.mkdir();
-            }
-            File file = new File(dirFile, System.currentTimeMillis() + ".jpg");
-            if (!file.exists()) {
-                try {
-                    file.createNewFile();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            ImageCapture.OutputFileOptions outputFileOptions = new ImageCapture.OutputFileOptions
-                    .Builder(file)
-                    .build();
-
-            mImageCapture.takePicture(outputFileOptions, ContextCompat.getMainExecutor(this), new ImageCapture.OnImageSavedCallback() {
-                @Override
-                public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
-                    showToast("photo saved success.");
-                }
-
-                @Override
-                public void onError(@NonNull ImageCaptureException exception) {
-                    showToast("photo saved fail.");
-                }
-            });
+        if (mImageCapture == null) return;
+        // 生成文件名
+        String name = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.US)
+                .format(System.currentTimeMillis()) + ".jpg";
+        // 使用 MediaStore 进行存储（适配 Android 10+）
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(MediaStore.MediaColumns.DISPLAY_NAME, name);
+        contentValues.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            contentValues.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES);
         }
+        ContentResolver contentResolver = getContentResolver();
+        ImageCapture.OutputFileOptions outputOptions = new ImageCapture.OutputFileOptions
+                .Builder(contentResolver, MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+                .build();
+        mImageCapture.takePicture(outputOptions, ContextCompat.getMainExecutor(this),
+                new ImageCapture.OnImageSavedCallback() {
+                    @Override
+                    public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
+                        String savedUri = outputFileResults.getSavedUri().toString();
+                        showToast("photo saved success.");
+                    }
+                    @Override
+                    public void onError(@NonNull ImageCaptureException exception) {
+                        showToast("photo saved fail.");
+                    }
+                });
     }
 
     private void switchCamera() {

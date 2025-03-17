@@ -12,7 +12,7 @@ android {
         //noinspection ExpiredTargetSdkVersion,OldTargetApi
         targetSdk 32
         versionCode 2
-        versionName "2.0.12_20250317"
+        versionName "2.0.13_20250317"
 
     }
 
