@@ -36,6 +36,21 @@ public interface IComPortManager extends android.os.IInterface
       return 0;
     }
     /**
+     * setSerialPortSettings
+     * 
+     * @param baudrate 波特率
+     * @param databits 数据位
+     * @param parity 校验位
+     * @param stopbits 停止位
+     * @param flowcontrol 流控制
+     * 
+     * @return status
+     */
+    @Override public int setSerialPortSettings(int baudrate, int databits, int parity, int stopbits, int flowcontrol) throws android.os.RemoteException
+    {
+      return 0;
+    }
+    /**
      * close port
      * 
      * @return status
@@ -143,6 +158,23 @@ public interface IComPortManager extends android.os.IInterface
           int _arg1;
           _arg1 = data.readInt();
           int _result = this.open(_arg0, _arg1);
+          reply.writeNoException();
+          reply.writeInt(_result);
+          break;
+        }
+        case TRANSACTION_setSerialPortSettings:
+        {
+          int _arg0;
+          _arg0 = data.readInt();
+          int _arg1;
+          _arg1 = data.readInt();
+          int _arg2;
+          _arg2 = data.readInt();
+          int _arg3;
+          _arg3 = data.readInt();
+          int _arg4;
+          _arg4 = data.readInt();
+          int _result = this.setSerialPortSettings(_arg0, _arg1, _arg2, _arg3, _arg4);
           reply.writeNoException();
           reply.writeInt(_result);
           break;
@@ -265,6 +297,39 @@ public interface IComPortManager extends android.os.IInterface
         return _result;
       }
       /**
+       * setSerialPortSettings
+       * 
+       * @param baudrate 波特率
+       * @param databits 数据位
+       * @param parity 校验位
+       * @param stopbits 停止位
+       * @param flowcontrol 流控制
+       * 
+       * @return status
+       */
+      @Override public int setSerialPortSettings(int baudrate, int databits, int parity, int stopbits, int flowcontrol) throws android.os.RemoteException
+      {
+        android.os.Parcel _data = android.os.Parcel.obtain();
+        android.os.Parcel _reply = android.os.Parcel.obtain();
+        int _result;
+        try {
+          _data.writeInterfaceToken(DESCRIPTOR);
+          _data.writeInt(baudrate);
+          _data.writeInt(databits);
+          _data.writeInt(parity);
+          _data.writeInt(stopbits);
+          _data.writeInt(flowcontrol);
+          boolean _status = mRemote.transact(Stub.TRANSACTION_setSerialPortSettings, _data, _reply, 0);
+          _reply.readException();
+          _result = _reply.readInt();
+        }
+        finally {
+          _reply.recycle();
+          _data.recycle();
+        }
+        return _result;
+      }
+      /**
        * close port
        * 
        * @return status
@@ -336,9 +401,10 @@ public interface IComPortManager extends android.os.IInterface
     static final int TRANSACTION_basicTypes = (android.os.IBinder.FIRST_CALL_TRANSACTION + 0);
     static final int TRANSACTION_listPorts = (android.os.IBinder.FIRST_CALL_TRANSACTION + 1);
     static final int TRANSACTION_open = (android.os.IBinder.FIRST_CALL_TRANSACTION + 2);
-    static final int TRANSACTION_close = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
-    static final int TRANSACTION_write = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
-    static final int TRANSACTION_read = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
+    static final int TRANSACTION_setSerialPortSettings = (android.os.IBinder.FIRST_CALL_TRANSACTION + 3);
+    static final int TRANSACTION_close = (android.os.IBinder.FIRST_CALL_TRANSACTION + 4);
+    static final int TRANSACTION_write = (android.os.IBinder.FIRST_CALL_TRANSACTION + 5);
+    static final int TRANSACTION_read = (android.os.IBinder.FIRST_CALL_TRANSACTION + 6);
   }
   public static final String DESCRIPTOR = "com.advantech.peripheralmanager.IComPortManager";
   /**
@@ -360,6 +426,18 @@ public interface IComPortManager extends android.os.IInterface
    * @return fd
    */
   public int open(String port, int baudrate) throws android.os.RemoteException;
+  /**
+   * setSerialPortSettings
+   * 
+   * @param baudrate 波特率
+   * @param databits 数据位
+   * @param parity 校验位
+   * @param stopbits 停止位
+   * @param flowcontrol 流控制
+   * 
+   * @return status
+   */
+  public int setSerialPortSettings(int baudrate, int databits, int parity, int stopbits, int flowcontrol) throws android.os.RemoteException;
   /**
    * close port
    * 

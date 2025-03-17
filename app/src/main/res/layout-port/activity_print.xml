@@ -17,7 +17,6 @@
         <Button style="@style/AppButtonStyle"
             android:id="@+id/clear_btn"
             android:text="@string/txt_clear"
-            android:backgroundTint="@color/teal_200"
             android:layout_gravity="right"
             tools:ignore="RtlHardcoded" />
 
@@ -54,6 +53,7 @@
             tools:ignore="Autofill,LabelFor,TextFields" />
 
         <TextView style="@style/AppContentTextViewStyle"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:text="@string/txt_print_picture"
             android:layout_width="match_parent" />
@@ -72,13 +72,11 @@
                 <Button style="@style/AppButtonStyle"
                     android:id="@+id/cut_pager_btn"
                     android:text="@string/txt_cut_pager"
-                    android:backgroundTint="@color/teal_200"
                     android:layout_width="120dp" />
 
                 <Button style="@style/AppButtonStyle"
                     android:id="@+id/print"
                     android:text="@string/txt_print"
-                    android:backgroundTint="@color/teal_200"
                     android:layout_width="120dp" />
 
             </LinearLayout>
@@ -129,35 +127,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText style="@style/AppContentTextViewStyle"
-                    android:id="@+id/align_edt"
-                    android:inputType="number"
+                <Spinner
+                    android:id="@+id/align_sp"
                     android:background="@drawable/corner_background"
+                    android:layout_weight="1"
                     android:layout_gravity="center"
                     android:layout_marginEnd="4dp"
                     android:padding="4dp"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:hint="@string/txt_default"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    tools:ignore="Autofill,LabelFor,TextFields" />
+                    android:layout_height="wrap_content" />
 
-                <EditText style="@style/AppContentTextViewStyle"
-                    android:id="@+id/charsize_edt"
-                    android:inputType="number"
+                <Spinner
+                    android:id="@+id/charsize_sp"
                     android:background="@drawable/corner_background"
+                    android:layout_weight="1"
                     android:layout_gravity="center"
                     android:layout_marginStart="4dp"
                     android:padding="4dp"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:hint="@string/txt_default"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    tools:ignore="Autofill,LabelFor,TextFields" />
+                    android:layout_height="wrap_content" />
             </TableRow>
         </TableLayout>
 
@@ -189,35 +177,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText style="@style/AppContentTextViewStyle"
-                    android:id="@+id/setzoom_edt"
-                    android:inputType="number"
+                <Spinner
+                    android:id="@+id/setzoom_sp"
                     android:background="@drawable/corner_background"
+                    android:layout_weight="1"
                     android:layout_gravity="center"
                     android:layout_marginEnd="4dp"
                     android:padding="4dp"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:hint="@string/txt_default"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    tools:ignore="Autofill,LabelFor,TextFields" />
+                    android:layout_height="wrap_content" />
 
-                <EditText style="@style/AppContentTextViewStyle"
-                    android:id="@+id/position_edt"
-                    android:inputType="number"
+                <Spinner
+                    android:id="@+id/position_sp"
                     android:background="@drawable/corner_background"
+                    android:layout_weight="1"
                     android:layout_gravity="center"
                     android:layout_marginStart="4dp"
                     android:padding="4dp"
-                    android:lines="1"
-                    android:maxLines="1"
-                    android:hint="@string/txt_default"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    tools:ignore="Autofill,LabelFor,TextFields" />
+                    android:layout_height="wrap_content" />
             </TableRow>
         </TableLayout>
 

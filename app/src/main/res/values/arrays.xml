@@ -38,4 +38,16 @@
     <string-array name="ethernet.interface">
         <item>eth0</item>
     </string-array>
+
+    <string-array name="com.databits">
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+    </string-array>
+
+    <string-array name="com.stopbits">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
 </resources>

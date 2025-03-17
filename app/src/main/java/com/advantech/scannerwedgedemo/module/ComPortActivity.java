@@ -41,9 +41,10 @@ public class ComPortActivity extends BaseActivity {
     private EditText comDataEdt;
     private TextView receiveTv;
 
-    private String[] baudrateArray;
-    private String[] portArray;
-    private String mBaudrate;
+    private String[] baudrateArray, portArray, databitArray, stopbitArray;
+    private Parity[] parityArray;
+    private FlowControl[] flowCrontrolArray;
+    private String mBaudrate, mDatabit, mStopbit, mParity, mFlowControl;
     private String mPort;
 
     private boolean isOpen;
@@ -51,6 +52,54 @@ public class ComPortActivity extends BaseActivity {
 
     private IComPortManager mService;
     private Spinner portSpinner;
+
+    private Spinner databitSp, stopbitSp, paritySp, flowControlSp;
+
+    public enum Parity {
+        None(0, "None"),
+        Odd(1, "Odd"),
+        Even(2, "Even"),
+        Mark(3, "Mark"),
+        Space(4, "Space");
+
+        private final int key;
+        private final String value;
+
+        Parity(int key, String value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public int getKey() {
+            return key;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    };
+
+    public enum FlowControl {
+        None(0, "None"),
+        RTS_CTS(1, "RTS/CTS"),
+        XON_XOFF(2, "XON/XOFF");
+
+        private final int key;
+        private final String value;
+
+        FlowControl(int key, String value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public int getKey() {
+            return key;
+        }
+
+        public String getValue() {
+            return value;
+        }
+    };
 
     private ServiceConnection serviceConnection = new ServiceConnection() {
         @Override
@@ -93,9 +142,79 @@ public class ComPortActivity extends BaseActivity {
     protected void initView(Bundle savedInstanceState) {
         TextView content = findViewById(R.id.content);
         content.setText("-> ComPort Demo");
+
+        databitSp = findViewById(R.id.databit_sp);
+        databitArray = getResources().getStringArray(R.array.com_databits);
+        databitSp.setSelection(3);
+        databitSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mDatabit = databitArray[position];
+                Log.d(TAG, "databit : " + mDatabit);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        stopbitSp = findViewById(R.id.stopbit_sp);
+        stopbitArray = getResources().getStringArray(R.array.com_stopbits);
+        stopbitSp.setSelection(0);
+        stopbitSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mStopbit = stopbitArray[position];
+                Log.d(TAG, "stopbit : " + mStopbit);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
+        paritySp = findViewById(R.id.parity_sp);
+        parityArray = Parity.values();
+        ArrayAdapter<Parity> parityAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, parityArray);
+        paritySp.setAdapter(parityAdapter);
+        paritySp.setSelection(0);
+        paritySp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mParity = String.valueOf(parityArray[position].getKey());
+                Log.d(TAG, "parity : " + mParity);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        flowControlSp = findViewById(R.id.flowcontrol_sp);
+        flowCrontrolArray = FlowControl.values();
+        ArrayAdapter<FlowControl> flowControlAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, flowCrontrolArray);
+        flowControlSp.setAdapter(flowControlAdapter);
+        flowControlSp.setSelection(0);
+        flowControlSp.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mFlowControl = String.valueOf(flowCrontrolArray[position].getKey());
+                Log.d(TAG, "flowControl : " + mFlowControl);
+                Log.d(TAG, "parent : " + parent.getId() + ", view : " + view.getId());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         baudrateArray = getResources().getStringArray(R.array.com_baudrate);
         Spinner baudrateSpinner = findViewById(R.id.baudrate_sp);
-        baudrateSpinner.setSelection(0);
+        baudrateSpinner.setSelection(17);
         baudrateSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -114,9 +233,40 @@ public class ComPortActivity extends BaseActivity {
         controlButton = findViewById(R.id.control_btn);
         controlButton.setEnabled(false);
         controlButton.setOnClickListener(v -> {
+            if (TextUtils.isEmpty(mDatabit)) {
+                showToast("dataBits is empty.");
+                return;
+            }
+            if (TextUtils.isEmpty(mStopbit)) {
+                showToast("stopBits is empty.");
+                return;
+            }
+            if (TextUtils.isEmpty(mParity)) {
+                showToast("parity is empty.");
+                return;
+            }
+            if (TextUtils.isEmpty(mFlowControl)) {
+                showToast("flowControl is empty.");
+                return;
+            }
+            if (TextUtils.isEmpty(mPort)) {
+                showToast("com port is empty.");
+                return;
+            }
+            if (TextUtils.isEmpty(mBaudrate)) {
+                showToast("baudrate is empty.");
+                return;
+            }
             if ("open".equals(controlButton.getText())) {
                 try {
-                    if (mService.open(mPort, Integer.parseInt(mBaudrate)) == 0) {
+                    int dataBits = Integer.parseInt(mDatabit);
+                    int stopBits = Integer.parseInt(mStopbit);
+                    int parity = Integer.parseInt(mParity);
+                    int flowControl = Integer.parseInt(mFlowControl);
+                    int baudrate = Integer.parseInt(mBaudrate);
+                    if (mService.open(mPort, baudrate) == 0) {
+                        int result = mService.setSerialPortSettings(baudrate, dataBits, parity, stopBits, flowControl);
+                        Log.d(TAG, "result : " + result);
                         showToast("the serial port successfully opened");
                         controlButton.setText("close");
                         baudrateSpinner.setEnabled(false);
@@ -127,6 +277,7 @@ public class ComPortActivity extends BaseActivity {
                         showToast("the serial port opening failed");
                     }
                 } catch (Exception e) {
+                    showToast("the serial port opening failed");
                     e.printStackTrace();
                 }
 

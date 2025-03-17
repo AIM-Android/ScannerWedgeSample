@@ -74,7 +74,7 @@
     <string name="txt_green_led">Green LED</string>
     <string name="txt_red_led">Red LED</string>
     <string name="txt_printstring">PrintString</string>
-    <string name="txt_print_barcode">Print BarCode</string>
+    <string name="txt_print_barcode">Print QrCode</string>
     <string name="txt_print_picture">Print Picture</string>
     <string name="txt_cut_pager">Cut Pager</string>
     <string name="txt_align">Align:</string>

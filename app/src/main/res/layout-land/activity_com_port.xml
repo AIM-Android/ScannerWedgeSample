@@ -54,7 +54,7 @@
                 android:text="@string/txt_send_windows"
                 android:layout_width="match_parent" />
 
-            <EditText
+            <EditText style="@style/AppContentTextViewStyle"
                 android:id="@+id/com_data_edt"
                 android:background="@drawable/corner_background"
                 android:padding="4dp"
@@ -64,67 +64,11 @@
                 android:layout_height="wrap_content"
                 tools:ignore="Autofill,LabelFor,NestedWeights,TextFields" />
 
-            <TableRow
-                android:padding="2dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView style="@style/AppContentTextViewStyle"
-                    android:text="@string/txt_baudrate"
-                    android:textColor="@color/black"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
-
-                <Spinner
-                    android:id="@+id/baudrate_sp"
-                    android:entries="@array/com.baudrate"
-                    android:layout_weight="3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
-            </TableRow>
-
-            <TableRow
-                android:padding="2dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <TextView style="@style/AppContentTextViewStyle"
-                    android:text="@string/txt_port"
-                    android:textColor="@color/black"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
-
-                <Spinner
-                    android:id="@+id/port_sp"
-                    android:entries="@array/com.interface"
-                    android:layout_weight="3"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content" />
-            </TableRow>
-
-            <TableRow
-                android:gravity="right"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:ignore="RtlHardcoded">
-
-                <Button style="@style/AppButtonStyle"
-                    android:id="@+id/control_btn"
-                    android:text="@string/txt_open"
-                    tools:ignore="RtlHardcoded" />
-
-                <View
-                    android:layout_width="16dp"
-                    android:layout_height="match_parent" />
-
-                <Button style="@style/AppButtonStyle"
-                    android:id="@+id/send_btn"
-                    android:text="@string/txt_send"
-                    tools:ignore="RtlHardcoded" />
-            </TableRow>
+            <Button style="@style/AppButtonStyle"
+                android:id="@+id/send_btn"
+                android:text="@string/txt_send"
+                android:layout_gravity="right"
+                tools:ignore="RtlHardcoded" />
 
             <TextView style="@style/AppSubTitleTextViewStyle"
                 android:textColor="@color/black"
@@ -132,19 +76,185 @@
                 android:text="@string/txt_receive_windows"
                 android:layout_width="match_parent" />
 
-            <TextView
+            <TextView style="@style/AppContentTextViewStyle"
                 android:id="@+id/receive_tv"
                 android:background="@drawable/corner_background"
                 android:padding="4dp"
-                android:maxLines="3"
-                android:lines="3"
+                android:maxLines="2"
+                android:lines="2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:ignore="NestedWeights" />
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableRow
+                    android:background="@drawable/right_angle_background"
+                    android:layout_gravity="center_vertical"
+                    android:paddingVertical="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <TextView style="@style/AppContentTextViewStyle"
+                        android:text="@string/txt_baudrate"
+                        android:textColor="@color/black"
+                        android:paddingLeft="4dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content" />
+
+                    <Spinner
+                        android:id="@+id/baudrate_sp"
+                        android:entries="@array/com.baudrate"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+
+                <View
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent" />
+
+                <Button style="@style/AppButtonStyle"
+                    android:id="@+id/clear_btn"
+                    android:text="@string/txt_clear"
+                    android:layout_gravity="right"
+                    tools:ignore="RtlHardcoded" />
+            </LinearLayout>
+
+            <TableRow
+                android:background="@drawable/right_angle_background"
+                android:layout_width="320dp"
+                android:paddingVertical="4dp"
+                android:layout_height="wrap_content">
+
+                <TextView style="@style/AppContentTextViewStyle"
+                    android:text="@string/txt_port"
+                    android:textColor="@color/black"
+                    android:paddingLeft="4dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content" />
+
+                <Spinner
+                    android:id="@+id/port_sp"
+                    android:entries="@array/com.interface"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableRow
+                    android:background="@drawable/right_angle_background"
+                    android:paddingLeft="4dp"
+                    android:paddingVertical="4dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView style="@style/AppContentTextViewStyle"
+                        android:text="DataBits"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content" />
+
+                    <Spinner
+                        android:id="@+id/databit_sp"
+                        android:entries="@array/com.databits"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent" />
+
+                <TableRow
+                    android:background="@drawable/right_angle_background"
+                    android:paddingLeft="4dp"
+                    android:paddingVertical="4dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView style="@style/AppContentTextViewStyle"
+                        android:text="StopBits"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content" />
+
+                    <Spinner
+                        android:id="@+id/stopbit_sp"
+                        android:entries="@array/com.databits"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TableRow
+                    android:background="@drawable/right_angle_background"
+                    android:paddingLeft="4dp"
+                    android:paddingVertical="4dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView style="@style/AppContentTextViewStyle"
+                        android:text="Parity"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content" />
+
+                    <Spinner
+                        android:id="@+id/parity_sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="match_parent" />
+
+                <TableRow
+                    android:background="@drawable/right_angle_background"
+                    android:paddingLeft="4dp"
+                    android:paddingVertical="4dp"
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
+                    <TextView style="@style/AppContentTextViewStyle"
+                        android:text="FlowControl"
+                        android:textColor="@color/black"
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content" />
+
+                    <Spinner
+                        android:id="@+id/flowcontrol_sp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </TableRow>
+            </LinearLayout>
             <Button style="@style/AppButtonStyle"
-                android:id="@+id/clear_btn"
-                android:text="@string/txt_clear"
+                android:id="@+id/control_btn"
+                android:text="@string/txt_open"
                 android:layout_gravity="right"
                 tools:ignore="RtlHardcoded" />
         </LinearLayout>
