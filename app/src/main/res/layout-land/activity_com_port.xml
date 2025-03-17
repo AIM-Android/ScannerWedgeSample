@@ -194,7 +194,7 @@
 
                     <Spinner
                         android:id="@+id/stopbit_sp"
-                        android:entries="@array/com.databits"
+                        android:entries="@array/com.stopbits"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </TableRow>

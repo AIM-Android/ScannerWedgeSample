@@ -58,9 +58,7 @@ public class ComPortActivity extends BaseActivity {
     public enum Parity {
         None(0, "None"),
         Odd(1, "Odd"),
-        Even(2, "Even"),
-        Mark(3, "Mark"),
-        Space(4, "Space");
+        Even(2, "Even");
 
         private final int key;
         private final String value;
@@ -81,8 +79,7 @@ public class ComPortActivity extends BaseActivity {
 
     public enum FlowControl {
         None(0, "None"),
-        RTS_CTS(1, "RTS/CTS"),
-        XON_XOFF(2, "XON/XOFF");
+        RTS_CTS(1, "RTS/CTS");
 
         private final int key;
         private final String value;
